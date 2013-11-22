@@ -112,8 +112,6 @@
 		E258CF36183EBE4C00F24587 /* CardMatch */ = {
 			isa = PBXGroup;
 			children = (
-				E258CF3F183EBE4C00F24587 /* CardMatchAppDelegate.h */,
-				E258CF40183EBE4C00F24587 /* CardMatchAppDelegate.m */,
 				E258CF42183EBE4C00F24587 /* Main.storyboard */,
 				E258CF45183EBE4C00F24587 /* CardMatchViewController.h */,
 				E258CF46183EBE4C00F24587 /* CardMatchViewController.m */,
@@ -126,6 +124,8 @@
 		E258CF37183EBE4C00F24587 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E258CF3F183EBE4C00F24587 /* CardMatchAppDelegate.h */,
+				E258CF40183EBE4C00F24587 /* CardMatchAppDelegate.m */,
 				E258CF38183EBE4C00F24587 /* CardMatch-Info.plist */,
 				E258CF39183EBE4C00F24587 /* InfoPlist.strings */,
 				E258CF3C183EBE4C00F24587 /* main.m */,

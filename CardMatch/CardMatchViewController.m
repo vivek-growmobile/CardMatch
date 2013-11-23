@@ -9,13 +9,19 @@
 #import "CardMatchViewController.h"
 
 @interface CardMatchViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
+@property (nonatomic) int flipCount;
 
 @end
 
 @implementation CardMatchViewController
 
-- (IBAction)touchCardButton:(UIButton *)sender
-{
+- (void) setFlipCount:(int)flipCount {
+    _flipCount = flipCount;
+    self.flipsLabel.text = [NSString stringWithFormat:@"Flips: %d", self.flipCount];
+}
+
+- (IBAction)touchCardButton:(UIButton *)sender {
     if ([sender.currentTitle length]) {
         [sender setBackgroundImage:[UIImage imageNamed:@"card-back"]
                           forState:UIControlStateNormal];
@@ -25,6 +31,7 @@
                           forState:UIControlStateNormal];
         [sender setTitle:@"A♣" forState:UIControlStateNormal];
     }
+    self.flipCount++;
 }
 
 

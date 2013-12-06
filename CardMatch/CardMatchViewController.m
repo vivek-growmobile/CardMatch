@@ -13,20 +13,28 @@
 @interface CardMatchViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
 @property (nonatomic) int flipCount;
-@property (nonatomic) PlayingCardDeck *deck;
+@property (nonatomic) Deck *deck;
 
 @end
 
 @implementation CardMatchViewController
 
-- (PlayingCardDeck *)deck {
-    if (!_deck) _deck = [[PlayingCardDeck alloc] init];
+- (Deck *)deck {
+    if (!_deck) _deck = [self createDeck];
     return _deck;
+}
+
+- (Deck *)createDeck{
+    return [[PlayingCardDeck alloc] init];
 }
 
 - (void) setFlipCount:(int)flipCount {
     _flipCount = flipCount;
     self.flipsLabel.text = [NSString stringWithFormat:@"Flips: %d", self.flipCount];
+}
+
+- (void) endGame {
+    self.flipsLabel.text = @"Game Over!";
 }
 
 - (IBAction)touchCardButton:(UIButton *)sender {
@@ -39,12 +47,13 @@
             Card *drawnCard = [self.deck drawRandomCard];
             [sender setBackgroundImage:[UIImage imageNamed:@"card-front"]
                               forState:UIControlStateNormal];
-            [sender setTitle:[drawnCard contents] forState:UIControlStateNormal];
+            [sender setTitle:drawnCard.contents forState:UIControlStateNormal];
             self.flipCount++;
         }
-        
+        else {
+            [self endGame];
+        }
     }
-    
 }
 
 

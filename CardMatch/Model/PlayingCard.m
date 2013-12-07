@@ -47,8 +47,17 @@
     }
 }
 
-
-
-
+- (int)match:(NSArray *)otherCards {
+    int match = 0;
+    for (PlayingCard* otherCard in otherCards){
+        if (self.rank == otherCard.rank){
+            match += 4;
+        }
+        if ([self.suit isEqualToString:otherCard.suit]){
+            match += 1;
+        }
+    }
+    return match;
+}
 
 @end

@@ -38,17 +38,25 @@
 - (IBAction)touchCardButton:(UIButton *)sender {
     int index = [self.cardButtons indexOfObject:sender];
     [self.game chooseCardAtIndex:index];
-    [self updateUI];
+    [self updateUI:[self.game gameOver]];
 }
 
-- (void)updateUI {
+- (void)updateUI:(BOOL)endGame {
     for (UIButton* cardButton in self.cardButtons){
         int index = [self.cardButtons indexOfObject:cardButton];
         Card* card = [self.game cardAtIndex:index];
-        [cardButton setTitle:[self titleForCard:card] forState:UIControlStateNormal];
-        [cardButton setBackgroundImage:[self imageForCard:card] forState:UIControlStateNormal];
-        cardButton.enabled = !card.isMatched;
-        self.score.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
+        if (endGame){
+            [cardButton setTitle:card.contents forState:UIControlStateNormal];
+            [cardButton setBackgroundImage:[UIImage imageNamed:@"card-front"] forState:UIControlStateNormal];
+            cardButton.enabled = !card.isMatched;
+            self.score.text = [NSString stringWithFormat:@"Game Over! Score: %d", self.game.score];
+        }
+        else {
+            [cardButton setTitle:[self titleForCard:card] forState:UIControlStateNormal];
+            [cardButton setBackgroundImage:[self imageForCard:card] forState:UIControlStateNormal];
+            cardButton.enabled = !card.isMatched;
+            self.score.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
+        }
     }
 }
 

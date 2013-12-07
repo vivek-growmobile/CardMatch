@@ -24,7 +24,8 @@
         else {
             self.cards = [[NSMutableArray alloc] init];
             for (int i = 0; i < count; i++){
-                [self.cards addObject:[deck drawRandomCard]];
+                Card* newCard = [deck drawRandomCard];
+                [self.cards addObject:newCard];
             }
         }
     }
@@ -65,6 +66,25 @@
 - (Card *)cardAtIndex:(NSUInteger)index {
     if (index < self.cards.count) return self.cards[index];
     else return nil;
+}
+
+- (BOOL)gameOver {
+    NSMutableArray* cardsRemaining = [[NSMutableArray alloc] init];
+    for (Card* card in self.cards){
+        if (!card.matched) [cardsRemaining addObject:card];
+    }
+    NSLog(@"Cards Remaining: %d", cardsRemaining.count);
+    if (cardsRemaining.count == 2){
+        for (Card* card in cardsRemaining){
+            NSLog(@"%@", card.contents);
+        }
+    }
+    for (Card* card in cardsRemaining){
+        int match = [card match:cardsRemaining];
+        NSLog(@"%d", match);
+        if (match > [card match:@[card]]) return NO;
+    }
+    return YES;
 }
 
 

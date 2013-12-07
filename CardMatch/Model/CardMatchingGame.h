@@ -17,6 +17,7 @@
 
 - (Card *)chooseCardAtIndex:(NSUInteger)index;
 - (Card *)cardAtIndex:(NSUInteger)index;
+- (BOOL)gameOver;
 
 @property (nonatomic, readonly) NSInteger score;
 

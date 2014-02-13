@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E6476A5D-2C30-4B4F-8F69-D80C115514BB</string>
+	<key>IDESourceControlProjectName</key>
+	<string>CardMatch</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>60F333E0-96BB-4018-B2F8-117EE2BED772</key>
+		<string>https://github.com/vivek-growmobile/CardMatch.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>CardMatch.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>60F333E0-96BB-4018-B2F8-117EE2BED772</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/vivek-growmobile/CardMatch.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>60F333E0-96BB-4018-B2F8-117EE2BED772</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>60F333E0-96BB-4018-B2F8-117EE2BED772</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CardMatch</string>
+		</dict>
+	</array>
+</dict>
+</plist>

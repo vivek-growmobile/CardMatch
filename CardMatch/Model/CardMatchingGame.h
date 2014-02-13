@@ -13,13 +13,15 @@
 @interface CardMatchingGame : NSObject
 
 - (instancetype)initWithCardCount:(NSUInteger)count
+                           ofType:(NSUInteger)gameType
                         usingDeck:(Deck *)deck;
 
 - (Card *)chooseCardAtIndex:(NSUInteger)index;
 - (Card *)cardAtIndex:(NSUInteger)index;
 - (BOOL)gameOver;
 
-@property (nonatomic, readonly) NSInteger score;
 
+@property (nonatomic, readonly) NSUInteger gameType;
+@property (nonatomic, readonly) NSInteger score;
 
 @end

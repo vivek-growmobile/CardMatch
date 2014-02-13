@@ -16,14 +16,22 @@
 @property (nonatomic, strong) CardMatchingGame *game;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *score;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *gameType;
 @end
 
 @implementation CardMatchViewController
 
 - (CardMatchingGame *)game {
     if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
+                                                             ofType:[self getGameType]
                                                           usingDeck:[self createDeck]];
     return _game;
+}
+
+- (void)newGame {
+    self.game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
+                                                     ofType:[self getGameType]
+                                                  usingDeck:[self createDeck]];
 }
 
 - (Deck *)deck {
@@ -35,9 +43,21 @@
     return [[PlayingCardDeck alloc] init];
 }
 
+- (NSUInteger)getGameType {
+    NSString *title = [self.gameType titleForSegmentAtIndex:self.gameType.selectedSegmentIndex];
+    NSUInteger selected = [title integerValue];
+    return selected;
+    
+}
+
 - (IBAction)touchCardButton:(UIButton *)sender {
     int index = [self.cardButtons indexOfObject:sender];
     [self.game chooseCardAtIndex:index];
+    [self updateUI:[self.game gameOver]];
+}
+
+- (IBAction)dealButton:(UIButton *)sender {
+    [self newGame];
     [self updateUI:[self.game gameOver]];
 }
 

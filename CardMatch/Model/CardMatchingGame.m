@@ -36,7 +36,7 @@
                 [self.cards addObject:newCard];
             }
         }
-        NSLog(@"Game Type %d", self.gameType);
+        NSLog(@"Game Type %lu", self.gameType);
     }
     return self;
 }
@@ -56,7 +56,7 @@
             self.turnScore = 0;
             
             NSLog(@"Unchoosing Chosen Card, Flipping: %@", card.contents);
-            NSLog(@"Matches: %d", self.matches.count);
+            NSLog(@"Matches: %lu", self.matches.count);
         }
         //if the card hasnt been chosen
         else {
@@ -80,11 +80,11 @@
                         self.score += (self.turnScore * MATCH_BONUS);
                         self.turnScore = 0;
                         NSLog(@"Complete Match, Adding: %@ To Matches", card.contents);
-                        NSLog(@"Matches: %d (Should be empty)", self.matches.count);
+                        NSLog(@"Matches: %lu (Should be empty)", self.matches.count);
                     }
                     else if (matchScore > 0 && self.matches.count < self.gameType){
                         NSLog(@"Incomplete Match, Adding: %@ To Matches", card.contents);
-                        NSLog(@"Matches: %d", self.matches.count);
+                        NSLog(@"Matches: %lu", self.matches.count);
                     }
                 }
                 //if there is no match

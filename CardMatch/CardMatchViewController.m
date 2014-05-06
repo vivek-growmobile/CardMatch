@@ -8,7 +8,7 @@
 
 #import "CardMatchViewController.h"
 #import "PlayingCardDeck.h"
-#import "PlayingCard.h"
+#import "Card.h"
 #import "CardMatchingGame.h"
 
 @interface CardMatchViewController ()
@@ -46,12 +46,13 @@
 - (NSUInteger)getGameType {
     NSString *title = [self.gameType titleForSegmentAtIndex:self.gameType.selectedSegmentIndex];
     NSUInteger selected = [title integerValue];
+    NSLog(@"Getting the game type %lu", selected);
     return selected;
     
 }
 
 - (IBAction)touchCardButton:(UIButton *)sender {
-    int index = [self.cardButtons indexOfObject:sender];
+    int index = (int)[self.cardButtons indexOfObject:sender];
     [self.game chooseCardAtIndex:index];
     [self updateUI:[self.game gameOver]];
 }
@@ -60,22 +61,27 @@
     [self newGame];
     [self updateUI:[self.game gameOver]];
 }
+- (IBAction)endGameButton:(id)sender {
+    [self updateUI:YES];
+}
 
 - (void)updateUI:(BOOL)endGame {
     for (UIButton* cardButton in self.cardButtons){
-        int index = [self.cardButtons indexOfObject:cardButton];
+        int index = (int)[self.cardButtons indexOfObject:cardButton];
         Card* card = [self.game cardAtIndex:index];
         if (endGame){
             [cardButton setTitle:card.contents forState:UIControlStateNormal];
             [cardButton setBackgroundImage:[UIImage imageNamed:@"card-front"] forState:UIControlStateNormal];
             cardButton.enabled = !card.isMatched;
-            self.score.text = [NSString stringWithFormat:@"Game Over! Score: %d", self.game.score];
+            self.score.text = [NSString stringWithFormat:@"Game Over! Score: %ld", self.game.score];
+            [self.gameType setEnabled:YES];
         }
         else {
             [cardButton setTitle:[self titleForCard:card] forState:UIControlStateNormal];
             [cardButton setBackgroundImage:[self imageForCard:card] forState:UIControlStateNormal];
             cardButton.enabled = !card.isMatched;
-            self.score.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
+            self.score.text = [NSString stringWithFormat:@"Score: %ld", self.game.score];
+            [self.gameType setEnabled:NO];
         }
     }
 }

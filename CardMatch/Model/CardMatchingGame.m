@@ -14,7 +14,7 @@
 @property (nonatomic, readwrite) NSUInteger gameType;
 
 @property (nonatomic, strong) NSMutableArray *cards; // of Card
-@property (nonatomic, strong) NSMutableArray *matches; // of Card
+//@property (nonatomic, strong) NSMutableArray *matches; // of Card
 
 @end
 
@@ -110,17 +110,27 @@
     else return nil;
 }
 
+- (NSUInteger)chosenCards {
+    NSUInteger numChosen = 0;
+    for (Card* card in self.cards){
+        if (card.chosen) {
+            numChosen += 1;
+        }
+    }
+    return numChosen;
+}
+
 - (BOOL)gameOver {
     NSMutableArray* cardsRemaining = [[NSMutableArray alloc] init];
     for (Card* card in self.cards){
         if (!card.matched) [cardsRemaining addObject:card];
     }
     //NSLog(@"Cards Remaining: %d", cardsRemaining.count);
-    if (cardsRemaining.count == 2){
-        for (Card* card in cardsRemaining){
-            NSLog(@"%@", card.contents);
-        }
-    }
+//    if (cardsRemaining.count == 2){
+//        for (Card* card in cardsRemaining){
+//            NSLog(@"%@", card.contents);
+//        }
+//    }
     for (Card* card in cardsRemaining){
         int match = [card match:cardsRemaining];
         //NSLog(@"%d", match);

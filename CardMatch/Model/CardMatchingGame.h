@@ -18,9 +18,11 @@
 
 - (Card *)chooseCardAtIndex:(NSUInteger)index;
 - (Card *)cardAtIndex:(NSUInteger)index;
+- (NSUInteger)chosenCards;
+
 - (BOOL)gameOver;
 
-
+@property (nonatomic, strong) NSMutableArray *matches; // of Card
 @property (nonatomic, readonly) NSUInteger gameType;
 @property (nonatomic, readonly) NSInteger score;
 

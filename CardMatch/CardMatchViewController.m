@@ -16,6 +16,7 @@
 @property (nonatomic, strong) CardMatchingGame *game;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *score;
+@property (weak, nonatomic) IBOutlet UILabel *justMatched;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *gameType;
 @end
 
@@ -81,6 +82,23 @@
             [cardButton setBackgroundImage:[self imageForCard:card] forState:UIControlStateNormal];
             cardButton.enabled = !card.isMatched;
             self.score.text = [NSString stringWithFormat:@"Score: %ld", self.game.score];
+        }
+    }
+    if (endGame){
+        return;
+    }
+    else {
+        NSString* matchText = @"Just Matched:";
+        for (Card* card in self.game.matches){
+            matchText = [matchText stringByAppendingString:[NSString stringWithFormat:@" %@", card.contents]];
+            NSLog(@"%@", matchText);
+        }
+        self.justMatched.text = matchText;
+        
+        if ([self.game chosenCards] == 0){
+            [self.gameType setEnabled:YES];
+        }
+        else {
             [self.gameType setEnabled:NO];
         }
     }

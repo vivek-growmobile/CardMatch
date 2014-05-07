@@ -7,7 +7,7 @@
 //
 
 #import "CardMatchViewController.h"
-#import "PlayingCardDeck.h"
+//#import "PlayingCardDeck.h"
 #import "Card.h"
 #import "CardMatchingGame.h"
 
@@ -16,7 +16,6 @@
 @property (nonatomic, strong) CardMatchingGame *game;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *score;
-@property (weak, nonatomic) IBOutlet UILabel *justMatched;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *gameType;
 @end
 
@@ -40,8 +39,10 @@
     return _deck;
 }
 
+//ABSTRACT
 - (Deck *)createDeck{
-    return [[PlayingCardDeck alloc] init];
+    return nil;
+    //return [[PlayingCardDeck alloc] init];
 }
 
 - (NSUInteger)getGameType {
@@ -88,12 +89,12 @@
         return;
     }
     else {
-        NSString* matchText = @"Just Matched:";
-        for (Card* card in self.game.matches){
-            matchText = [matchText stringByAppendingString:[NSString stringWithFormat:@" %@", card.contents]];
-            NSLog(@"%@", matchText);
-        }
-        self.justMatched.text = matchText;
+//        NSString* matchText = @"Just Matched:";
+//        for (Card* card in self.game.matches){
+//            matchText = [matchText stringByAppendingString:[NSString stringWithFormat:@" %@", card.contents]];
+//            NSLog(@"%@", matchText);
+//        }
+//        self.justMatched.text = matchText;
         
         if ([self.game chosenCards] == 0){
             [self.gameType setEnabled:YES];

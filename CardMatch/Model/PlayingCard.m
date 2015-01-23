@@ -47,15 +47,21 @@
     }
 }
 
-//Override
-- (int)match:(NSArray *)otherCards {
+//Helper method for just matching 2 playing cards
+- (int)matchCards:(PlayingCard *)card1
+              And:(PlayingCard *)card2 {
     int match = 0;
-    for (PlayingCard* otherCard in otherCards){
-        if (self.rank == otherCard.rank){
-            match += 4;
-        }
-        if ([self.suit isEqualToString:otherCard.suit]){
-            match += 1;
+    if (card1.rank == card2.rank) match += 4;
+    if ([card1.suit isEqualToString:card2.suit]) match += 1;
+    return match;
+}
+
+//Override
+- (int)match:(NSArray *)cards {
+    int match = 0;
+    for (int i = 0; i < cards.count - 1; i++){
+        for (int j = 1; j < cards.count; j++){
+            match += [self matchCards:cards[i]And:cards[j]];
         }
     }
     return match;

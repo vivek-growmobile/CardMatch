@@ -9,13 +9,12 @@
 #import "CardMatchingGame.h"
 
 @interface CardMatchingGame()
-@property (nonatomic, readwrite) NSInteger score;
-@property (nonatomic, readwrite) NSInteger turnScore;
+@property (nonatomic, strong, readwrite) NSMutableArray* matches;
 @property (nonatomic, readwrite) NSUInteger gameType;
+@property (nonatomic, readwrite) NSInteger score;
 @property (nonatomic, readwrite) BOOL gameOver;
 
 @property (nonatomic, strong) NSMutableArray *cards; // of Card
-//@property (nonatomic, strong) NSMutableArray *matches; // of Card
 
 
 @end
@@ -39,7 +38,7 @@
             }
         }
         self.gameOver = NO;
-        NSLog(@"Game Type %lu", self.gameType);
+        NSLog(@"Game Type %d", (int)self.gameType);
     }
     return self;
 }
@@ -51,58 +50,50 @@
     Card* card = nil;
     if (index < self.cards.count){
         card = self.cards[index];
-        // if this card is already chosen
+        // If this card is already chosen
         if (card.isChosen){
             card.chosen = NO;
-            
             [self.matches removeObjectIdenticalTo:card];
-            self.turnScore = 0;
             
-            NSLog(@"Unchoosing Chosen Card, Flipping: %@", card.contents);
-            NSLog(@"Matches: %lu", self.matches.count);
+            NSLog(@"Unchoosing %@", card.contents);
+            NSLog(@"Num of Matches: %d", (int)self.matches.count);
         }
         //if the card hasnt been chosen
         else {
             card.chosen = YES;
-            
-            //if there are already matches in the queue
-            if (self.matches.count > 0){
+            [self.matches addObject:card];
+             NSLog(@"Chose %@", card.contents);
+            // If we've reached the max number of choosable cards for this game type
+            if (self.matches.count == self.gameType){
+
                 int matchScore = [card match:self.matches];
                 NSLog(@"Match Score: %d", matchScore);
-                //if there is a match
-                if (matchScore > 0 || self.turnScore > 0){
-                    [self.matches addObject:card];
-                    self.turnScore += matchScore;
-                    //if we've matched the max number of cards for this game type
-                    if (self.matches.count == self.gameType){
-                        NSLog(@"Complete Match, Adding: %@ To Matches", card.contents);
-                        while (self.matches.count > 0) {
-                            Card* match = self.matches[0];
-                            match.matched = YES;
-                            [self.matches removeObjectAtIndex:0];
-                        }
-                        self.score += (self.turnScore * MATCH_BONUS);
-                        self.turnScore = 0;
-                        NSLog(@"Matches: %lu (Should be empty)", self.matches.count);
+                
+                //If it was a good match add up the score and remove all the involved cards
+                if (matchScore > 0) {
+                    while (self.matches.count > 0) {
+                        Card* match = self.matches[0];
+                        match.matched = YES;
+                        [self.matches removeObjectAtIndex:0];
                     }
-                    //if we've matched cards but its not yet the max for this game type
-                    else if (matchScore > 0 && self.matches.count < self.gameType){
-                        NSLog(@"Incomplete Match, Adding: %@ To Matches", card.contents);
-                        NSLog(@"Matches: %lu", self.matches.count);
-                    }
+                    NSLog(@"Num of Matches: %d (should be zero)", (int)self.matches.count);
+                    self.score += (matchScore * MATCH_BONUS);
                 }
-                //if there is no match
+                
+                //If it was a bad match unchoose the earliest chosen match
                 else {
+// If you dont get a match: flip over all cards but the most recently chosen OR
+// flip over just the earliest chosen one?
+                    //while (self.matches.count > 1) {
+                    Card* match = self.matches[0];
+                    match.matched = NO;
+                    match.chosen = NO;
+                    [self.matches removeObjectAtIndex:0];
+                    //}
+                    NSLog(@"Num of Matches: %d (should be zero)", (int)self.matches.count);
                     self.score -= MISMATCH_PENALTY;
-                    Card* prevChosen = [self.matches objectAtIndex:0];
-                    prevChosen.chosen = NO;
-                    [self.matches replaceObjectAtIndex:0 withObject:card];
                 }
-            }
-            //no matches in the queue
-            else {
-                [self.matches addObject:card];
-                NSLog(@"Matches Empty, Adding: %@", card.contents);
+                NSLog(@"Game Score: %d", self.score);
             }
         }
     }
@@ -125,33 +116,24 @@
 }
 
 - (BOOL)gameOver{
+    //If game hasn't been ended by user, check if game has naturally ended
     if (!_gameOver){
-        _gameOver = self.gameOverLogic;
+        _gameOver = self.checkIfGameIsOver;
     }
     return _gameOver;
 }
 
-- (BOOL)gameOverLogic {
+- (BOOL)checkIfGameIsOver {
     //Get all unmatched cards
     NSMutableArray* cardsRemaining = [[NSMutableArray alloc] init];
     for (Card* card in self.cards){
         if (!card.matched) [cardsRemaining addObject:card];
     }
     
-//    NSLog(@"Cards Remaining: %d", cardsRemaining.count);
-//    if (cardsRemaining.count == 2){
-//        for (Card* card in cardsRemaining){
-//            NSLog(@"%@", card.contents);
-//        }
-//    }
-    
     //See if there are any potential matches left
-    for (Card* card in cardsRemaining){
-        int match = [card match:cardsRemaining];
-        //NSLog(@"%d", match);
-        if (match > [card match:@[card]]) return NO;
-    }
-    return YES;
+    Card* card = [self.cards objectAtIndex:0];
+    if ([card match:cardsRemaining] > 0) return NO;
+    else return YES;
 }
 
 - (void)endGame {

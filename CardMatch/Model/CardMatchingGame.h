@@ -18,9 +18,12 @@
 
 - (Card *)chooseCardAtIndex:(NSUInteger)index;
 - (Card *)cardAtIndex:(NSUInteger)index;
+//The number of cards in play that have been chosen
 - (NSUInteger)chosenCards;
 
-@property (nonatomic, strong) NSMutableArray *matches; // of Card
+//An array holding cards that have been flipped on this turn
+@property (nonatomic, strong, readonly) NSMutableArray *matches; // of Card
+//The number of cards that can be matched together in a turn
 @property (nonatomic, readonly) NSUInteger gameType;
 @property (nonatomic, readonly) NSInteger score;
 @property (nonatomic, readonly) BOOL gameOver;

@@ -12,9 +12,11 @@
 @property (nonatomic, readwrite) NSInteger score;
 @property (nonatomic, readwrite) NSInteger turnScore;
 @property (nonatomic, readwrite) NSUInteger gameType;
+@property (nonatomic, readwrite) BOOL gameOver;
 
 @property (nonatomic, strong) NSMutableArray *cards; // of Card
 //@property (nonatomic, strong) NSMutableArray *matches; // of Card
+
 
 @end
 
@@ -36,6 +38,7 @@
                 [self.cards addObject:newCard];
             }
         }
+        self.gameOver = NO;
         NSLog(@"Game Type %lu", self.gameType);
     }
     return self;
@@ -70,8 +73,9 @@
                 if (matchScore > 0 || self.turnScore > 0){
                     [self.matches addObject:card];
                     self.turnScore += matchScore;
-                    
+                    //if we've matched the max number of cards for this game type
                     if (self.matches.count == self.gameType){
+                        NSLog(@"Complete Match, Adding: %@ To Matches", card.contents);
                         while (self.matches.count > 0) {
                             Card* match = self.matches[0];
                             match.matched = YES;
@@ -79,9 +83,9 @@
                         }
                         self.score += (self.turnScore * MATCH_BONUS);
                         self.turnScore = 0;
-                        NSLog(@"Complete Match, Adding: %@ To Matches", card.contents);
                         NSLog(@"Matches: %lu (Should be empty)", self.matches.count);
                     }
+                    //if we've matched cards but its not yet the max for this game type
                     else if (matchScore > 0 && self.matches.count < self.gameType){
                         NSLog(@"Incomplete Match, Adding: %@ To Matches", card.contents);
                         NSLog(@"Matches: %lu", self.matches.count);
@@ -120,23 +124,38 @@
     return numChosen;
 }
 
-- (BOOL)gameOver {
+- (BOOL)gameOver{
+    if (!_gameOver){
+        _gameOver = self.gameOverLogic;
+    }
+    return _gameOver;
+}
+
+- (BOOL)gameOverLogic {
+    //Get all unmatched cards
     NSMutableArray* cardsRemaining = [[NSMutableArray alloc] init];
     for (Card* card in self.cards){
         if (!card.matched) [cardsRemaining addObject:card];
     }
-    //NSLog(@"Cards Remaining: %d", cardsRemaining.count);
+    
+//    NSLog(@"Cards Remaining: %d", cardsRemaining.count);
 //    if (cardsRemaining.count == 2){
 //        for (Card* card in cardsRemaining){
 //            NSLog(@"%@", card.contents);
 //        }
 //    }
+    
+    //See if there are any potential matches left
     for (Card* card in cardsRemaining){
         int match = [card match:cardsRemaining];
         //NSLog(@"%d", match);
         if (match > [card match:@[card]]) return NO;
     }
     return YES;
+}
+
+- (void)endGame {
+    self.gameOver = YES;
 }
 
 

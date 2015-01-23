@@ -15,6 +15,12 @@
 
 @implementation PlayingCardMatchViewController
 
+//Override
+- (NSUInteger)getGameType {
+    NSUInteger gameType = 2;
+    return gameType;
+}
+
 - (Deck *)createDeck {
     return [[PlayingCardDeck alloc] init];
 }

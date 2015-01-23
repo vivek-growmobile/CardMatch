@@ -15,4 +15,6 @@
 //FOR SUBCLASSES
 - (Deck *)createDeck;
 
+- (NSUInteger)getGameType;
+
 @end

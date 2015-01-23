@@ -11,17 +11,29 @@
 @implementation SetCard
 @synthesize suit = _suit;
 
-+ (NSArray *)validSuits {
-    return @[@"", @"", @""];
++ (NSArray *)validSymbols {
+    return @[@"▲", @"●", @"■"];
 }
 
-- (void)setSuit:(NSString *)suit {
-    if ([[SetCard validSuits] containsObject:suit]){
-        _suit = suit;
-    }
++ (NSArray *)validRanks {
+    return @[@"1", @"2", @"3"];
 }
 
-- (NSString *)suit {
++ (NSArray *)validShades {
+    return @[@"solid", @"striped", @"open"];
+}
+
++ (NSArray *)validColors {
+    return @[@"red", @"green", @"purple"];
+}
+
+- (void)setSymbol:(NSString *)suit {
+//    if ([[SetCard validSuits] containsObject:suit]){
+//        _suit = suit;
+//    }
+}
+
+- (NSString *)symbol {
     return _suit ? _suit : @"?";
 }
 

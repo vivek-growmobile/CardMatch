@@ -14,11 +14,11 @@
 - (instancetype) init {
     self = [super init];
     if (self){
-        for (NSString* suit in [SetCard validSuits]){
-            SetCard *newCard = [[SetCard alloc] init];
-            newCard.suit = suit;
-            [self addCard:newCard];
-        }
+//        for (NSString* suit in [SetCard validSuits]){
+//            SetCard *newCard = [[SetCard alloc] init];
+//            newCard.suit = suit;
+//            [self addCard:newCard];
+//        }
     }
     return self;
 }

@@ -11,6 +11,6 @@
 @interface SetCard : Card
 @property (strong, nonatomic) NSString* suit;
 
-+ (NSArray *)validSuits;
++ (NSArray *)validSymbols;
 
 @end

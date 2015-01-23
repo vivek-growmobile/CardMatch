@@ -20,10 +20,11 @@
 - (Card *)cardAtIndex:(NSUInteger)index;
 - (NSUInteger)chosenCards;
 
-- (BOOL)gameOver;
-
 @property (nonatomic, strong) NSMutableArray *matches; // of Card
 @property (nonatomic, readonly) NSUInteger gameType;
 @property (nonatomic, readonly) NSInteger score;
+@property (nonatomic, readonly) BOOL gameOver;
+
+- (void)endGame;
 
 @end

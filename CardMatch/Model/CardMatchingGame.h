@@ -19,7 +19,8 @@
 - (Card *)chooseCardAtIndex:(NSUInteger)index;
 - (Card *)cardAtIndex:(NSUInteger)index;
 //The number of cards in play that have been chosen
-- (NSUInteger)chosenCards;
+// WAS FOR GAME TYPE CONTROL BUTTON
+//- (NSUInteger)chosenCards;
 
 //An array holding cards that have been flipped on this turn
 @property (nonatomic, strong, readonly) NSMutableArray *matches; // of Card

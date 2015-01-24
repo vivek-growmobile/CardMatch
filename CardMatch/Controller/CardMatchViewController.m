@@ -18,7 +18,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *score;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *gameType;
 @property (weak, nonatomic) IBOutlet UILabel *matchedTicker;
-@property (strong, nonatomic) NSString* matchedTickerText;
+@property (weak, nonatomic) IBOutlet UIButton *dealButton;
+@property (strong, nonatomic) NSString *matchedTickerText;
 @end
 
 @implementation CardMatchViewController
@@ -58,6 +59,16 @@
     
 }
 
+- (IBAction)dealButton:(UIButton *)sender {
+    [self newGame];
+    [self updateUi];
+}
+
+- (IBAction)endGameButton:(id)sender {
+    [self.game endGame];
+    [self updateUi];
+}
+
 - (IBAction)touchCardButton:(UIButton *)sender {
     //Collect data before drawing card
     NSInteger oldScore = self.game.score;
@@ -70,79 +81,49 @@
     NSInteger turnScore = newScore - oldScore;
     
     [turnMatches addObject:drawnCard];
-    [self updateUiWithTurnMatches:turnMatches
-                     AndTurnScore:turnScore];
-}
-
-- (IBAction)dealButton:(UIButton *)sender {
-    [self newGame];
-    [self updateUi];
-}
-- (IBAction)endGameButton:(id)sender {
-    [self.game endGame];
+    [self setMatchedTickerTextWithMatches:turnMatches
+                                      AndScore:turnScore];
     [self updateUi];
 }
 
-- (NSString *)generateMatchedTickerTextWithMatches:(NSArray *)turnMatches
-                                          AndScore:(NSInteger)turnScore {
-    NSString* matchText = @"Matched : ";
-    for (Card* card in turnMatches){
-        matchText = [matchText stringByAppendingString:[NSString stringWithFormat:@"%@ ", card.contents]];
+
+- (void)setMatchedTickerTextWithMatches:(NSArray *)turnMatches
+                               AndScore:(NSInteger)turnScore {
+    NSString* matchTickerText = @"";
+    if (turnMatches.count == self.game.gameType){
+        for (Card* card in turnMatches){
+            matchTickerText = [matchTickerText stringByAppendingString:[NSString stringWithFormat:@"%@ ", card.contents]];
+        }
+        matchTickerText = [matchTickerText stringByAppendingString:
+                           [NSString stringWithFormat:@"%@ %d points", (turnScore > 0 ? @"Match! " : @"Don't Match!"), (int)turnScore]];
     }
-    matchText = [matchText stringByAppendingString:[NSString stringWithFormat:@"for %ld points", turnScore]];
-    return matchText;
-}
-
-- (void)updateUiWithTurnMatches:(NSArray *)turnMatches
-                   AndTurnScore:(NSInteger)turnScore {
-    
-    [self updateUi];
-    self.matchedTicker.text = [self generateMatchedTickerTextWithMatches:turnMatches
-                                                                AndScore:turnScore];
-    
+    self.matchedTicker.text = matchTickerText;
 }
 
 - (void)updateUi{
     BOOL gameOver = self.game.gameOver;
+    //Update each card
     for (UIButton* cardButton in self.cardButtons){
         int index = (int)[self.cardButtons indexOfObject:cardButton];
         Card* card = [self.game cardAtIndex:index];
-        if (gameOver){
-            [cardButton setTitle:card.contents forState:UIControlStateNormal];
-            [cardButton setBackgroundImage:[UIImage imageNamed:@"card-front"] forState:UIControlStateNormal];
-            cardButton.enabled = !card.isMatched;
-            self.score.text = [NSString stringWithFormat:@"Game Over! Score: %ld", self.game.score];
-            //[self.gameType setEnabled:YES];
-        }
-        else {
-            [cardButton setTitle:[self titleForCard:card] forState:UIControlStateNormal];
-            [cardButton setBackgroundImage:[self imageForCard:card] forState:UIControlStateNormal];
-            cardButton.enabled = !card.isMatched;
-            self.score.text = [NSString stringWithFormat:@"Score: %ld", self.game.score];
-            self.matchedTicker.text = @"Matched: ";
-        }
-        
+        [cardButton setTitle:(gameOver ? card.contents : [self titleForCard:card])
+                    forState:UIControlStateNormal];
+        [cardButton setBackgroundImage:(gameOver ? [UIImage imageNamed:@"card-front"] : [self imageForCard:card])
+                              forState:UIControlStateNormal];
+        cardButton.enabled = !card.isMatched;
     }
-    
-// WAS FOR GAME TYPE CONTROL BUTTON
-//    if (endGame){
-//        return;
-//    }
-//    else {
-//        NSString* matchText = @"Just Matched:";
-//        for (Card* card in self.game.matches){
-//            matchText = [matchText stringByAppendingString:[NSString stringWithFormat:@" %@", card.contents]];
-//            NSLog(@"%@", matchText);
-//        }
-//        self.justMatched.text = matchText;
-//        
-//        if ([self.game chosenCards] == 0){
-//            [self.gameType setEnabled:YES];
-//        }
-//        else {
-//            [self.gameType setEnabled:NO];
-//        }
-//    }
+    //General Updates
+    if (gameOver){
+        self.score.text = [NSString stringWithFormat:@"Game Over! Score: %d", (int)self.game.score];
+        self.matchedTicker.text = @"";
+        self.dealButton.enabled = YES;
+        //[self.gameType setEnabled:YES];
+    }
+    else {
+        self.score.text = [NSString stringWithFormat:@"Score: %d", (int)self.game.score];
+        self.dealButton.enabled = NO;
+        //[self.gameType setEnabled:YES];
+    }
 }
 
 - (NSString *)titleForCard:(Card *)card {

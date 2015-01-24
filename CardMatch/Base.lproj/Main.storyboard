@@ -361,6 +361,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Playing Card" id="22b-ae-tuh"/>
                     <connections>
+                        <outlet property="dealButton" destination="wdh-Ao-Isa" id="OTu-94-emz"/>
                         <outlet property="matchedTicker" destination="PI2-TO-VlB" id="xvq-4I-iQc"/>
                         <outlet property="score" destination="Jhs-Go-IVI" id="y4W-gG-caM"/>
                         <outletCollection property="cardButtons" destination="R2J-gk-3S0" id="ZYr-7C-vg8"/>

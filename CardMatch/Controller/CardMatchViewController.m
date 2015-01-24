@@ -16,7 +16,7 @@
 @property (nonatomic, strong) CardMatchingGame *game;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *score;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *gameType;
+//@property (weak, nonatomic) IBOutlet UISegmentedControl *gameType;
 @property (weak, nonatomic) IBOutlet UILabel *matchedTicker;
 @property (weak, nonatomic) IBOutlet UIButton *dealButton;
 @property (strong, nonatomic) NSString *matchedTickerText;
@@ -52,7 +52,7 @@
 //ABSTRACT
 - (NSUInteger)getGameType {
     return 0;
-//    NSString *title = [self.gameType   titleForSegmentAtIndex:self.gameType.selectedSegmentIndex];
+//    NSString *title = [self.gameType titleForSegmentAtIndex:self.gameType.selectedSegmentIndex];
 //    NSUInteger selected = [title integerValue];
 //    NSLog(@"Getting the game type %lu", selected);
 //    return selected;
@@ -125,6 +125,7 @@
         //[self.gameType setEnabled:YES];
     }
 }
+
 
 - (NSString *)titleForCard:(Card *)card {
     return card.isChosen ? card.contents : @"";

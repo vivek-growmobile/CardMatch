@@ -14,11 +14,20 @@
 - (instancetype) init {
     self = [super init];
     if (self){
-//        for (NSString* suit in [SetCard validSuits]){
-//            SetCard *newCard = [[SetCard alloc] init];
-//            newCard.suit = suit;
-//            [self addCard:newCard];
-//        }
+        for (NSString* number in [SetCard validNumbers]){
+            for (NSString* symbol in [SetCard validSymbols]){
+                for (NSString* shading in [SetCard validShades]){
+                    for (NSString* color in [SetCard validColors]){
+                        SetCard* newCard = [[SetCard alloc] init];
+                        newCard.color = color;
+                        newCard.shading = shading;
+                        newCard.symbol = symbol;
+                        newCard.number = number;
+                        [self addCard:newCard];
+                    }
+                }
+            }
+        }
     }
     return self;
 }

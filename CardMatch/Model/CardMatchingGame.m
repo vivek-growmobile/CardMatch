@@ -90,7 +90,7 @@
                     match.chosen = NO;
                     [self.matches removeObjectAtIndex:0];
                     //}
-                    NSLog(@"Num of Matches: %d (should be zero)", (int)self.matches.count);
+                    NSLog(@"Num of Matches: %d", (int)self.matches.count);
                     self.score -= MISMATCH_PENALTY;
                 }
                 NSLog(@"Game Score: %d", self.score);
@@ -118,7 +118,7 @@
 - (BOOL)gameOver{
     //If game hasn't been ended by user, check if game has naturally ended
     if (!_gameOver){
-        _gameOver = self.checkIfGameIsOver;
+        _gameOver = [self checkIfGameIsOver];
     }
     return _gameOver;
 }
@@ -129,11 +129,22 @@
     for (Card* card in self.cards){
         if (!card.matched) [cardsRemaining addObject:card];
     }
+    NSLog(@"Remaining Cards: %d", cardsRemaining.count);
     
-    //See if there are any potential matches left
-    Card* card = [self.cards objectAtIndex:0];
-    if ([card match:cardsRemaining] > 0) return NO;
-    else return YES;
+    if (cardsRemaining.count == 0) return YES;
+    else {
+        //See if there are any potential matches left
+        Card* card = [self.cards objectAtIndex:0];
+        
+        if ([card match:cardsRemaining] > 0){
+            NSLog(@"Matches Left");
+            return NO;
+        }
+        else {
+            return YES;
+        }
+    }
+   
 }
 
 - (void)endGame {

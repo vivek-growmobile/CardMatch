@@ -60,11 +60,12 @@
 - (int)match:(NSArray *)cards {
     int match = 0;
     for (int i = 0; i < cards.count - 1; i++){
-        for (int j = 1; j < cards.count; j++){
+        for (int j = i + 1; j < cards.count; j++){
             PlayingCard* Card1 = [cards objectAtIndex:i];
             PlayingCard* Card2 = [cards objectAtIndex:j];
-            match += [self matchCards:Card1
+            int cardsScore = [self matchCards:Card1
                                   And:Card2];
+            match += cardsScore;
         }
     }
     return match;

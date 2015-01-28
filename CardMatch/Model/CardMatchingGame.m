@@ -129,22 +129,22 @@
     for (Card* card in self.cards){
         if (!card.matched) [cardsRemaining addObject:card];
     }
-    NSLog(@"Remaining Cards: %d", cardsRemaining.count);
     
     if (cardsRemaining.count == 0) return YES;
     else {
         //See if there are any potential matches left
         Card* card = [self.cards objectAtIndex:0];
         
-        if ([card match:cardsRemaining] > 0){
-            NSLog(@"Matches Left");
-            return NO;
+        int remainingScore = [card match:cardsRemaining];
+        if (remainingScore > 0){
+           NSLog(@"%d Points Still on the Board!", remainingScore);
+          return NO;
         }
         else {
-            return YES;
+           return YES;
         }
     }
-   
+
 }
 
 - (void)endGame {

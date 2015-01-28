@@ -24,6 +24,12 @@
 
 @implementation CardMatchViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self updateUi];
+    
+}
+
 - (CardMatchingGame *)game {
     if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
                                                              ofType:[self getGameType]
@@ -64,7 +70,7 @@
     [self updateUi];
 }
 
-- (IBAction)endGameButton:(id)sender {
+- (IBAction)endGameButton:(UIButton *)sender {
     [self.game endGame];
     [self updateUi];
 }
@@ -126,13 +132,16 @@
     }
 }
 
-
+//ABSTRACT
 - (NSString *)titleForCard:(Card *)card {
-    return card.isChosen ? card.contents : @"";
+    return nil;
+    //return card.isChosen ? card.contents : @"";
 }
 
+//ABSTRACT
 - (UIImage *)imageForCard:(Card *)card {
-    return [UIImage imageNamed:card.isChosen ? @"card-front" : @"card-back"];
+    return nil;
+    //return [UIImage imageNamed:card.isChosen ? @"card-front" : @"card-back"];
 }
 
 

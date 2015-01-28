@@ -20,7 +20,7 @@
 }
 
 + (NSArray *)validSymbols {
-    return @[@"1", @"2", @"3"];
+    return @[@"▲", @"●", @"■"];
 }
 
 + (NSArray *)validShades {
@@ -29,6 +29,16 @@
 
 + (NSArray *)validColors {
     return @[@"red", @"green", @"purple"];
+}
+
++ (int)setSize {
+    return [SetCard validNumbers].count;
+}
+
+- (NSString *)contents {
+    NSString* contents = [NSString stringWithFormat:@"[%@ %@ %@ %@]", self.number, self.symbol, self.shading, self.color];
+    return contents;
+    
 }
 
 - (void)setNumber:(NSString *)number {
@@ -50,7 +60,7 @@
 }
 
 - (void)setColor:(NSString *)color {
-    if ([[SetCard validShades] containsObject:color]){
+    if ([[SetCard validColors] containsObject:color]){
         _color = color;
     }
 }
@@ -73,7 +83,10 @@
     
     int match = 0;
     for (NSSet* elementSet in elementsSeen){
-        match += elementSet.count;
+        
+        if (elementSet.count == [SetCard setSize]){
+            match += cards.count;
+        }
     }
     return match;
 }

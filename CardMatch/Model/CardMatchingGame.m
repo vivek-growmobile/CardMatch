@@ -90,10 +90,10 @@
                     match.chosen = NO;
                     [self.matches removeObjectAtIndex:0];
                     //}
-                    NSLog(@"Num of Matches: %d", (int)self.matches.count);
+                    //NSLog(@"Num of Matches: %d", (int)self.matches.count);
                     self.score -= MISMATCH_PENALTY;
                 }
-                NSLog(@"Game Score: %d", self.score);
+                //NSLog(@"Game Score: %d", self.score);
             }
         }
     }

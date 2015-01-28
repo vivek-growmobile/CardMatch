@@ -21,8 +21,19 @@
     return gameType;
 }
 
+//Override
 - (Deck *)createDeck {
     return [[PlayingCardDeck alloc] init];
+}
+
+//Override
+- (NSString *)titleForCard:(Card *)card {
+    return card.isChosen ? card.contents : @"";
+}
+
+//Override
+- (UIImage *)imageForCard:(Card *)card {
+    return [UIImage imageNamed:card.isChosen ? @"card-front" : @"card-back"];
 }
 
 @end

@@ -61,7 +61,10 @@
     int match = 0;
     for (int i = 0; i < cards.count - 1; i++){
         for (int j = 1; j < cards.count; j++){
-            match += [self matchCards:cards[i]And:cards[j]];
+            PlayingCard* Card1 = [cards objectAtIndex:i];
+            PlayingCard* Card2 = [cards objectAtIndex:j];
+            match += [self matchCards:Card1
+                                  And:Card2];
         }
     }
     return match;

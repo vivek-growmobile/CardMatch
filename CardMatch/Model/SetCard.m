@@ -84,7 +84,8 @@
     int match = 0;
     for (NSSet* elementSet in elementsSeen){
         
-        if (elementSet.count == [SetCard setSize]){
+        //Two of ___ and one of ___ is not a set
+        if (elementSet.count == 1 || elementSet.count == [SetCard setSize]){
             match += cards.count;
         }
     }

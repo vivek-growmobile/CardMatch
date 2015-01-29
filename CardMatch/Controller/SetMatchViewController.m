@@ -54,7 +54,7 @@
     int numSymbols = [setCard.number intValue];
     for (int i = 0; i < numSymbols; i++){
         [title appendAttributedString:[[NSAttributedString alloc] initWithString:
-                                       [NSString stringWithFormat:@"%@ ", setCard.symbol]]];
+                                       [NSString stringWithFormat:@"%@\n", setCard.symbol]]];
     }
     
     //Set the Colors

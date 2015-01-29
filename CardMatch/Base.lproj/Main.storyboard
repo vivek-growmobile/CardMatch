@@ -310,7 +310,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A8I-oB-Eag">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A8I-oB-Eag">
                                 <rect key="frame" x="18" y="20" width="42" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="card-front"/>
@@ -318,7 +318,7 @@
                                     <action selector="touchCardButton:" destination="qFh-R4-WdR" eventType="touchUpInside" id="W9B-he-c4D"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G9C-mg-75n">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G9C-mg-75n">
                                 <rect key="frame" x="68" y="20" width="42" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="card-front"/>
@@ -326,7 +326,7 @@
                                     <action selector="touchCardButton:" destination="qFh-R4-WdR" eventType="touchUpInside" id="0Zy-Ln-DMR"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wt9-Sk-7IK">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wt9-Sk-7IK">
                                 <rect key="frame" x="118" y="20" width="42" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="card-front"/>
@@ -334,7 +334,7 @@
                                     <action selector="touchCardButton:" destination="qFh-R4-WdR" eventType="touchUpInside" id="9Kt-Ta-NFT"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mri-W0-e0w">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mri-W0-e0w">
                                 <rect key="frame" x="168" y="20" width="42" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="card-front"/>
@@ -342,7 +342,7 @@
                                     <action selector="touchCardButton:" destination="qFh-R4-WdR" eventType="touchUpInside" id="Vup-31-1E7"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u1P-2r-BoT">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u1P-2r-BoT">
                                 <rect key="frame" x="218" y="20" width="42" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="card-front"/>
@@ -350,7 +350,7 @@
                                     <action selector="touchCardButton:" destination="qFh-R4-WdR" eventType="touchUpInside" id="5T6-ll-YlZ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAb-pn-t3q">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="PAb-pn-t3q">
                                 <rect key="frame" x="268" y="20" width="42" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -362,7 +362,7 @@
                                     <action selector="touchCardButton:" destination="qFh-R4-WdR" eventType="touchUpInside" id="BS6-uH-jUP"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gtG-RO-mnJ">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gtG-RO-mnJ">
                                 <rect key="frame" x="18" y="97" width="42" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="card-front"/>
@@ -370,7 +370,7 @@
                                     <action selector="touchCardButton:" destination="qFh-R4-WdR" eventType="touchUpInside" id="Icw-CM-Ktt"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F2P-Ks-hYl">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F2P-Ks-hYl">
                                 <rect key="frame" x="68" y="97" width="42" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="card-front"/>
@@ -378,7 +378,7 @@
                                     <action selector="touchCardButton:" destination="qFh-R4-WdR" eventType="touchUpInside" id="tTJ-zt-AQv"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DTC-of-EWj">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DTC-of-EWj">
                                 <rect key="frame" x="118" y="97" width="42" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="card-front"/>
@@ -386,7 +386,7 @@
                                     <action selector="touchCardButton:" destination="qFh-R4-WdR" eventType="touchUpInside" id="hYu-6O-FhF"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Li4-DB-ght">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Li4-DB-ght">
                                 <rect key="frame" x="168" y="97" width="42" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="card-front"/>
@@ -394,7 +394,7 @@
                                     <action selector="touchCardButton:" destination="qFh-R4-WdR" eventType="touchUpInside" id="wPg-YK-IbW"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kXS-rB-emG">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kXS-rB-emG">
                                 <rect key="frame" x="218" y="97" width="42" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="card-front"/>
@@ -402,7 +402,7 @@
                                     <action selector="touchCardButton:" destination="qFh-R4-WdR" eventType="touchUpInside" id="LEt-z4-fJl"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0M-cb-JIa">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="B0M-cb-JIa">
                                 <rect key="frame" x="268" y="97" width="42" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -414,7 +414,7 @@
                                     <action selector="touchCardButton:" destination="qFh-R4-WdR" eventType="touchUpInside" id="dfy-bY-MPT"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="40l-aq-Ffl">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="40l-aq-Ffl">
                                 <rect key="frame" x="18" y="174" width="42" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="card-front"/>
@@ -422,7 +422,7 @@
                                     <action selector="touchCardButton:" destination="qFh-R4-WdR" eventType="touchUpInside" id="1ni-yp-zGt"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sgh-FL-Tfn">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sgh-FL-Tfn">
                                 <rect key="frame" x="68" y="174" width="42" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="card-front"/>
@@ -430,7 +430,7 @@
                                     <action selector="touchCardButton:" destination="qFh-R4-WdR" eventType="touchUpInside" id="AuS-PB-G7l"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TJc-fr-UOg">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TJc-fr-UOg">
                                 <rect key="frame" x="118" y="174" width="42" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="card-front"/>
@@ -438,7 +438,7 @@
                                     <action selector="touchCardButton:" destination="qFh-R4-WdR" eventType="touchUpInside" id="T6D-Gt-tVc"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hcE-EM-m39">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hcE-EM-m39">
                                 <rect key="frame" x="168" y="174" width="42" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="card-front"/>
@@ -446,7 +446,7 @@
                                     <action selector="touchCardButton:" destination="qFh-R4-WdR" eventType="touchUpInside" id="X2A-rv-Fws"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lr2-Hd-goT">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lr2-Hd-goT">
                                 <rect key="frame" x="218" y="174" width="42" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="card-front"/>
@@ -454,7 +454,7 @@
                                     <action selector="touchCardButton:" destination="qFh-R4-WdR" eventType="touchUpInside" id="vdl-NK-2MM"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z2A-uB-dvI">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="z2A-uB-dvI">
                                 <rect key="frame" x="268" y="174" width="42" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -466,7 +466,7 @@
                                     <action selector="touchCardButton:" destination="qFh-R4-WdR" eventType="touchUpInside" id="y1W-hn-2Zm"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cYL-GW-KVh">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cYL-GW-KVh">
                                 <rect key="frame" x="18" y="251" width="42" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="card-front"/>
@@ -474,7 +474,7 @@
                                     <action selector="touchCardButton:" destination="qFh-R4-WdR" eventType="touchUpInside" id="Uzd-qK-u4a"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YtQ-Xb-zu8">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YtQ-Xb-zu8">
                                 <rect key="frame" x="68" y="251" width="42" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="card-front"/>
@@ -482,7 +482,7 @@
                                     <action selector="touchCardButton:" destination="qFh-R4-WdR" eventType="touchUpInside" id="Pu0-bM-teY"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ad-vf-bSr">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ad-vf-bSr">
                                 <rect key="frame" x="118" y="251" width="42" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="card-front"/>
@@ -490,7 +490,7 @@
                                     <action selector="touchCardButton:" destination="qFh-R4-WdR" eventType="touchUpInside" id="HUZ-27-hWa"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HrZ-I5-kZW">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HrZ-I5-kZW">
                                 <rect key="frame" x="168" y="251" width="42" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="card-front"/>
@@ -498,7 +498,7 @@
                                     <action selector="touchCardButton:" destination="qFh-R4-WdR" eventType="touchUpInside" id="hya-Lr-9XM"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PAf-q6-qej">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PAf-q6-qej">
                                 <rect key="frame" x="218" y="251" width="42" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="card-front"/>
@@ -506,7 +506,7 @@
                                     <action selector="touchCardButton:" destination="qFh-R4-WdR" eventType="touchUpInside" id="9O2-qB-4iv"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K9G-I5-c6Q">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K9G-I5-c6Q">
                                 <rect key="frame" x="268" y="251" width="42" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="card-front"/>

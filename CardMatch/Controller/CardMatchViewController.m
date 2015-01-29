@@ -86,7 +86,9 @@
     NSInteger newScore = self.game.score;
     NSInteger turnScore = newScore - oldScore;
     
-    [turnMatches addObject:drawnCard];
+    if (![turnMatches containsObject:drawnCard]){
+        [turnMatches addObject:drawnCard];
+    }
     [self setMatchedTickerTextWithMatches:turnMatches
                                       AndScore:turnScore];
     [self updateUi];

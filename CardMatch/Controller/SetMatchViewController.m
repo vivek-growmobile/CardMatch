@@ -73,7 +73,7 @@
 }
 
 //Override
-- (UIImage *)imageForCard:(Card *)card {
+- (UIImage *)imageForCard:(Card *)card {    
     return [UIImage imageNamed:@"card-front"];
 }
 

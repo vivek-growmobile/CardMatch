@@ -12,7 +12,7 @@
 @property (nonatomic, strong, readwrite) NSMutableArray* matches;
 @property (nonatomic, readwrite) NSUInteger gameType;
 @property (nonatomic, readwrite) NSInteger score;
-@property (nonatomic, readwrite) BOOL gameOver;
+@property (nonatomic, readwrite, getter = isGameOver) BOOL gameOver;
 
 @property (nonatomic, strong) NSMutableArray *cards; // of Card
 
@@ -97,6 +97,7 @@
             }
         }
     }
+    if([self checkIfGameIsOver]) [self endGame];
     return card;
 }
 
@@ -115,13 +116,13 @@
     return numChosen;
 }
 
-- (BOOL)gameOver{
-    //If game hasn't been ended by user, check if game has naturally ended
-    if (!_gameOver){
-        _gameOver = [self checkIfGameIsOver];
-    }
-    return _gameOver;
-}
+//- (BOOL)isGameOver{
+//    //If game hasn't been ended by user, check if game has naturally ended
+////    if (!_gameOver){
+////        _gameOver = [self checkIfGameIsOver];
+////    }
+//    return _gameOver;
+//}
 
 - (BOOL)checkIfGameIsOver {
     //Get all unmatched cards
@@ -137,11 +138,11 @@
         
         int remainingScore = [card match:cardsRemaining];
         if (remainingScore > 0){
-           NSLog(@"%d Points Still on the Board!", remainingScore);
-          return NO;
+            NSLog(@"%d Points Still on the Board!", remainingScore);
+            return NO;
         }
         else {
-           return YES;
+            return YES;
         }
     }
 
@@ -149,6 +150,9 @@
 
 - (void)endGame {
     self.gameOver = YES;
+    for (Card* card in self.cards){
+        card.chosen = YES;
+    }
 }
 
 

@@ -107,14 +107,14 @@
 }
 
 - (void)updateUi{
-    BOOL gameOver = self.game.gameOver;
+    BOOL gameOver = self.game.isGameOver;
     //Update each card
     for (UIButton* cardButton in self.cardButtons){
         int index = (int)[self.cardButtons indexOfObject:cardButton];
         Card* card = [self.game cardAtIndex:index];
-        [cardButton setTitle:(gameOver ? card.contents : [self titleForCard:card])
-                    forState:UIControlStateNormal];
-        [cardButton setBackgroundImage:(gameOver ? [UIImage imageNamed:@"card-front"] : [self imageForCard:card])
+        [cardButton setAttributedTitle:[self titleForCard:card]
+                              forState:UIControlStateNormal];
+        [cardButton setBackgroundImage:[self imageForCard:card]
                               forState:UIControlStateNormal];
         cardButton.enabled = !card.isMatched;
     }
@@ -133,7 +133,7 @@
 }
 
 //ABSTRACT
-- (NSString *)titleForCard:(Card *)card {
+- (NSAttributedString *)titleForCard:(Card *)card {
     return nil;
     //return card.isChosen ? card.contents : @"";
 }

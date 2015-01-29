@@ -27,7 +27,7 @@
 //The number of cards that can be matched together in a turn
 @property (nonatomic, readonly) NSUInteger gameType;
 @property (nonatomic, readonly) NSInteger score;
-@property (nonatomic, readonly) BOOL gameOver;
+@property (nonatomic, readonly, getter = isGameOver) BOOL gameOver;
 
 - (void)endGame;
 

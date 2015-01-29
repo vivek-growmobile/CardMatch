@@ -27,8 +27,8 @@
 }
 
 //Override
-- (NSString *)titleForCard:(Card *)card {
-    return card.isChosen ? card.contents : @"";
+- (NSAttributedString *)titleForCard:(Card *)card {
+    return [[NSAttributedString alloc] initWithString:(card.isChosen ? card.contents : @"")];
 }
 
 //Override

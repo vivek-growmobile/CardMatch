@@ -37,7 +37,7 @@
         return 0.5;
     }
     else if ([shading isEqualToString:@"open"]){
-        return 0;
+        return 0.2;
     }
     else {
         return 1;
@@ -45,7 +45,7 @@
 }
 
 //Override
-- (NSString *)titleForCard:(Card *)card {
+- (NSAttributedString *)titleForCard:(Card *)card {
     NSMutableAttributedString* title = [[NSMutableAttributedString alloc] initWithString:@""];
     
     SetCard* setCard = (SetCard*)card;
@@ -57,9 +57,11 @@
                                        [NSString stringWithFormat:@"%@ ", setCard.symbol]]];
     }
     
-    //Set the Colors and Shading
+    //Set the Colors
     SEL colorMethodSelector = NSSelectorFromString([NSString stringWithFormat:@"%@Color",setCard.color]);
     UIColor* cardColor = [UIColor performSelector:colorMethodSelector];
+    
+    //Set Shading
     CGFloat cardShading = [self getFloatValueFor:setCard.shading];
     cardColor = [cardColor colorWithAlphaComponent:cardShading];
     [title addAttribute:NSForegroundColorAttributeName
@@ -67,7 +69,7 @@
                   range:NSMakeRange(0, title.length)];
     
     //return card.contents;
-    return [title string];
+    return title;
 }
 
 //Override

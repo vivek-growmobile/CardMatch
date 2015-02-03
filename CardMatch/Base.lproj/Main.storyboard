@@ -574,7 +574,7 @@
                     <navigationItem key="navigationItem" title="Set" id="pxe-PS-AuY">
                         <barButtonItem key="rightBarButtonItem" title="History" id="YmN-Wh-SJW">
                             <connections>
-                                <segue destination="1HL-bf-X50" kind="push" id="XDU-zH-0hv"/>
+                                <segue destination="1HL-bf-X50" kind="push" identifier="View Game History" id="XDU-zH-0hv"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -624,11 +624,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5hg-nW-Tr1">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5hg-nW-Tr1" userLabel="m">
                                 <rect key="frame" x="20" y="77" width="280" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <attributedString key="attributedText"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="No History">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="smallSystem"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>

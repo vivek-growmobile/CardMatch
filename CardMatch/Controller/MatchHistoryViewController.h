@@ -10,7 +10,6 @@
 
 @interface MatchHistoryViewController : UIViewController
 
-- (void)updateHistoryTo:(NSAttributedString *)currentHistory;
-- (void)resetHistory;
+@property (nonatomic, strong) NSAttributedString* currentHistory;
 
 @end

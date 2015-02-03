@@ -169,7 +169,7 @@
     if ([segue.identifier isEqualToString:@"View Game History"]){
         if ([segue.destinationViewController isKindOfClass:[MatchHistoryViewController class]]){
             MatchHistoryViewController* mhVC = (MatchHistoryViewController *)segue.destinationViewController;
-            [mhVC updateHistoryTo:self.gameHistory];
+            mhVC.currentHistory = self.gameHistory;
         }
     }
 }

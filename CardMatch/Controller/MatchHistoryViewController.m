@@ -19,25 +19,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.matchHistory.editable = NO;
+    self.matchHistory.attributedText = self.currentHistory;
+    NSLog(@"Match History Attr Text: %@",self.matchHistory.attributedText);
     
     // Do any additional setup after loading the view.
 }
-
-
-- (void)updateHistoryTo:(NSAttributedString *)currentHistory{
-    NSLog(@"Current History: %@", currentHistory);
-    self.matchHistory.attributedText = currentHistory;
-    NSLog(@"Match History Attr Text: %@",self.matchHistory.attributedText);
-}
-
-- (void)resetHistory {
-    self.matchHistory.attributedText = [[NSAttributedString alloc] initWithString:@""];
-    //TODO
-    //self.matchHistory.textStorage = @"";
-}
-
-
-
 
 @end

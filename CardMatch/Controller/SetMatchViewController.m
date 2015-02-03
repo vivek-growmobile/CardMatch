@@ -74,7 +74,7 @@
 
 //Override
 - (UIImage *)imageForCard:(Card *)card {    
-    return [UIImage imageNamed:@"card-front"];
+    return [UIImage imageNamed:card.isChosen? @"set-card-chosen" : @"card-front"];
 }
 
 

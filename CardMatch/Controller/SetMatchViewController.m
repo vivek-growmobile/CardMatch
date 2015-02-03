@@ -45,7 +45,7 @@
 }
 
 //Override
-- (NSAttributedString *)titleForCard:(Card *)card {
+- (NSAttributedString *)illustrateCard:(Card *)card {
     NSMutableAttributedString* title = [[NSMutableAttributedString alloc] initWithString:@""];
     
     SetCard* setCard = (SetCard*)card;
@@ -54,7 +54,7 @@
     int numSymbols = [setCard.number intValue];
     for (int i = 0; i < numSymbols; i++){
         [title appendAttributedString:[[NSAttributedString alloc] initWithString:
-                                       [NSString stringWithFormat:@"%@\n", setCard.symbol]]];
+                                       [NSString stringWithFormat:@"%@ ", setCard.symbol]]];
     }
     
     //Set the Colors
@@ -70,6 +70,11 @@
     
     //return card.contents;
     return title;
+}
+
+//Override
+- (NSAttributedString *)titleForCard:(Card *)card {
+    return [self illustrateCard:card];
 }
 
 //Override

@@ -15,6 +15,7 @@
 //FOR SUBCLASSES
 - (Deck *)createDeck;
 - (NSUInteger)getGameType;
+- (NSAttributedString *)illustrateCard:(Card *)card;
 - (NSAttributedString *)titleForCard:(Card *)card;
 - (UIImage *)imageForCard:(Card *)card;
 

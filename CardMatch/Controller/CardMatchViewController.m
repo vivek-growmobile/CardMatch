@@ -106,10 +106,9 @@
         [turnMatches addObject:drawnCard];
     }
     [self setLastMatchedTextWithMatches:turnMatches
-                                 AndScore:turnScore];
+                               AndScore:turnScore];
     
-    [self.gameHistory appendAttributedString:self.lastMatchedText];
-    //NSLog(@"History: %@", self.gameHistory);
+    if (self.lastMatchedText.length > 0) [self updateGameHistory];
     
     [self updateUi];
 }
@@ -130,6 +129,12 @@
     }
     //self.matchedTicker.text = matchTickerText;
     self.lastMatchedText = lastMatch;
+}
+
+- (void)updateGameHistory {
+    [self.gameHistory appendAttributedString:self.lastMatchedText];
+    [self.gameHistory appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
+    NSLog(@"History: %@", self.gameHistory);
 }
 
 - (void)updateUi{
@@ -159,7 +164,8 @@
     self.matchedTicker.attributedText = self.lastMatchedText;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue
+                 sender:(id)sender {
     if ([segue.identifier isEqualToString:@"View Game History"]){
         if ([segue.destinationViewController isKindOfClass:[MatchHistoryViewController class]]){
             MatchHistoryViewController* mhVC = (MatchHistoryViewController *)segue.destinationViewController;

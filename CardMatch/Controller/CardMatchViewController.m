@@ -10,6 +10,7 @@
 //#import "PlayingCardDeck.h"
 #import "Card.h"
 #import "CardMatchingGame.h"
+#import "MatchHistoryViewController.h"
 
 @interface CardMatchViewController ()
 @property (nonatomic) Deck *deck;
@@ -19,7 +20,8 @@
 //@property (weak, nonatomic) IBOutlet UISegmentedControl *gameType;
 @property (weak, nonatomic) IBOutlet UILabel *matchedTicker;
 @property (weak, nonatomic) IBOutlet UIButton *dealButton;
-@property (strong, nonatomic) NSString *matchedTickerText;
+@property (strong, nonatomic) NSMutableAttributedString *lastMatchedText;
+@property (strong, nonatomic) NSMutableAttributedString *gameHistory;
 @end
 
 @implementation CardMatchViewController
@@ -47,6 +49,20 @@
 - (Deck *)deck {
     if (!_deck) _deck = [self createDeck];
     return _deck;
+}
+
+- (NSMutableAttributedString *)lastMatchedText {
+    if (!_lastMatchedText){
+        _lastMatchedText = [[NSMutableAttributedString alloc] initWithString:@""];
+    }
+    return _lastMatchedText;
+}
+
+- (NSMutableAttributedString *)gameHistory {
+    if (!_gameHistory){
+        _gameHistory  = [[NSMutableAttributedString alloc] initWithString:@""];
+    }
+    return _gameHistory;
 }
 
 //ABSTRACT
@@ -89,23 +105,31 @@
     if (![turnMatches containsObject:drawnCard]){
         [turnMatches addObject:drawnCard];
     }
-    [self setMatchedTickerTextWithMatches:turnMatches
-                                      AndScore:turnScore];
+    [self setLastMatchedTextWithMatches:turnMatches
+                                 AndScore:turnScore];
+    
+    [self.gameHistory appendAttributedString:self.lastMatchedText];
+    //NSLog(@"History: %@", self.gameHistory);
+    
     [self updateUi];
 }
 
 
-- (void)setMatchedTickerTextWithMatches:(NSArray *)turnMatches
+- (void)setLastMatchedTextWithMatches:(NSArray *)turnMatches
                                AndScore:(NSInteger)turnScore {
-    NSString* matchTickerText = @"";
+    //NSString* matchTickerText = @"";
+    NSMutableAttributedString* lastMatch = [[NSMutableAttributedString alloc] initWithString:@""];
     if (turnMatches.count == self.game.gameType){
         for (Card* card in turnMatches){
-            matchTickerText = [matchTickerText stringByAppendingString:[NSString stringWithFormat:@"%@ ", card.contents]];
+            [lastMatch appendAttributedString:[self illustrateCard:card]];
+            [lastMatch appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
+            NSLog(@"Card drawing: %@", [self illustrateCard:card]);
+            NSLog(@"Ticker Text: %@", lastMatch);
         }
-        matchTickerText = [matchTickerText stringByAppendingString:
-                           [NSString stringWithFormat:@"%@ %d points", (turnScore > 0 ? @"Match! " : @"Don't Match!"), (int)turnScore]];
+        [lastMatch appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %d points", (turnScore > 0 ? @"Match! " : @"Don't Match!"), (int)turnScore]]];
     }
-    self.matchedTicker.text = matchTickerText;
+    //self.matchedTicker.text = matchTickerText;
+    self.lastMatchedText = lastMatch;
 }
 
 - (void)updateUi{
@@ -123,7 +147,7 @@
     //General Updates
     if (gameOver){
         self.score.text = [NSString stringWithFormat:@"Game Over! Score: %d", (int)self.game.score];
-        self.matchedTicker.text = @"";
+        self.lastMatchedText = [[NSMutableAttributedString alloc] initWithString:@""];
         self.dealButton.enabled = YES;
         //[self.gameType setEnabled:YES];
     }
@@ -132,6 +156,21 @@
         self.dealButton.enabled = NO;
         //[self.gameType setEnabled:YES];
     }
+    self.matchedTicker.attributedText = self.lastMatchedText;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"View Game History"]){
+        if ([segue.destinationViewController isKindOfClass:[MatchHistoryViewController class]]){
+            MatchHistoryViewController* mhVC = (MatchHistoryViewController *)segue.destinationViewController;
+            [mhVC updateHistoryTo:self.gameHistory];
+        }
+    }
+}
+
+//ABSTRACT
+- (NSAttributedString *)illustrateCard:(Card *)card {
+    return nil;
 }
 
 //ABSTRACT

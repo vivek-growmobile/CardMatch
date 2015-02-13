@@ -9,13 +9,11 @@
 #import "CardMatchViewController.h"
 //#import "PlayingCardDeck.h"
 #import "Card.h"
-#import "CardMatchingGame.h"
+#import "CardView.h"
+
 #import "MatchHistoryViewController.h"
 
 @interface CardMatchViewController ()
-@property (nonatomic) Deck *deck;
-@property (nonatomic, strong) CardMatchingGame *game;
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *score;
 //@property (weak, nonatomic) IBOutlet UISegmentedControl *gameType;
 @property (weak, nonatomic) IBOutlet UILabel *matchedTicker;
@@ -26,25 +24,50 @@
 
 @implementation CardMatchViewController
 
+#pragma mark initialization
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self updateUi];
-    
+    [self newGame];
 }
 
+#define DEFAULT_NUM_CARDS 24
+#define GRID_WIDTH 6
+#define GRID_HEIGHT 4
+
+- (void)newGame {
+    self.game = [[CardMatchingGame alloc] initWithCardCount:DEFAULT_NUM_CARDS ofType:[self getGameType] usingDeck:[self createDeck]];
+    [self initUi];
+}
+
+- (void)initUi {
+    self.cardViews = [[NSMutableArray alloc] init];
+    CGRect cardFrame = CGRectMake(self.cardTableView.bounds.origin.x, self.cardTableView.bounds.origin.y, self.cardTableView.bounds.size.width / GRID_WIDTH, self.cardTableView.bounds.size.height / GRID_HEIGHT);
+    for (int i = 0; i < self.game.cards.count; i++){
+        CardView* newCardView = [self createCardViewInFrame:cardFrame];
+        [self.cardViews addObject:newCardView];
+        [self.cardTableView addSubview:newCardView];
+        cardFrame.origin.x = cardFrame.origin.x + (self.cardTableView.bounds.size.width / GRID_WIDTH);
+        if (cardFrame.origin.x >= self.cardTableView.bounds.size.width){
+            cardFrame.origin.x = self.cardTableView.bounds.origin.x;
+            cardFrame.origin.y = cardFrame.origin.y + (self.cardTableView.bounds.size.height / GRID_HEIGHT);
+        }
+    }
+    [self updateUi];
+}
+
+
+//ABSTRACT
+- (CardView *)createCardViewInFrame:(CGRect)frame {
+    return nil;
+}
+
+
+#pragma mark properties
 - (CardMatchingGame *)game {
-    if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
-                                                             ofType:[self getGameType]
-                                                          usingDeck:[self createDeck]];
+    if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:DEFAULT_NUM_CARDS ofType:[self getGameType] usingDeck:[self createDeck]];
     return _game;
 }
 
-- (void)newGame {
-    //Dont have to release.. if you set strong pointer to something else in heap it lowers its Ref count.
-    self.game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
-                                                     ofType:[self getGameType]
-                                                  usingDeck:[self createDeck]];
-}
 
 - (Deck *)deck {
     if (!_deck) _deck = [self createDeck];
@@ -65,10 +88,11 @@
     return _gameHistory;
 }
 
+
+
 //ABSTRACT
 - (Deck *)createDeck{
     return nil;
-    //return [[PlayingCardDeck alloc] init];
 }
 
 //ABSTRACT
@@ -81,6 +105,8 @@
     
 }
 
+
+#pragma mark UI Target-Action
 - (IBAction)dealButton:(UIButton *)sender {
     [self newGame];
     [self updateUi];
@@ -91,20 +117,26 @@
     [self updateUi];
 }
 
-- (IBAction)touchCardButton:(UIButton *)sender {
+- (IBAction)tapCardTable:(UITapGestureRecognizer *)gesture {
+    if (gesture.state == UIGestureRecognizerStateEnded){
+        CGPoint tappedPoint = [gesture locationInView:self.cardTableView];
+        UIView* tappedSubView = [self.cardTableView hitTest:tappedPoint withEvent:nil];
+        if ([tappedSubView isKindOfClass:[CardView class]]){
+            [self tapCardView:(CardView *)tappedSubView];
+        }
+    }
+}
+
+- (void)tapCardView:(CardView *)cardView{
     //Collect data before drawing card
     NSInteger oldScore = self.game.score;
     NSMutableArray *turnMatches = [[NSMutableArray alloc] initWithArray:self.game.matches];
     //DrawCard
-    int index = (int)[self.cardButtons indexOfObject:sender];
+    int index = (int)[self.cardViews indexOfObject:cardView];
     Card* drawnCard = [self.game chooseCardAtIndex:index];
-    //Update UI for drawn card
+    NSLog(@"Drawn Card: %@", drawnCard.contents);
     NSInteger newScore = self.game.score;
     NSInteger turnScore = newScore - oldScore;
-    
-    if (![turnMatches containsObject:drawnCard]){
-        [turnMatches addObject:drawnCard];
-    }
     [self setLastMatchedTextWithMatches:turnMatches
                                AndScore:turnScore];
     
@@ -113,7 +145,7 @@
     [self updateUi];
 }
 
-
+#pragma mark UI
 - (void)setLastMatchedTextWithMatches:(NSArray *)turnMatches
                                AndScore:(NSInteger)turnScore {
     //NSString* matchTickerText = @"";
@@ -137,17 +169,20 @@
     NSLog(@"History: %@", self.gameHistory);
 }
 
+//ABSTRACT
+- (void)drawCard:(Card *)card
+      onCardView:(CardView *)cardView {
+    return;
+}
+
 - (void)updateUi{
     BOOL gameOver = self.game.isGameOver;
     //Update each card
-    for (UIButton* cardButton in self.cardButtons){
-        int index = (int)[self.cardButtons indexOfObject:cardButton];
+    for (CardView* cardView in self.cardViews){
+        int index = (int)[self.cardViews indexOfObject:cardView];
         Card* card = [self.game cardAtIndex:index];
-        [cardButton setAttributedTitle:[self titleForCard:card]
-                              forState:UIControlStateNormal];
-        [cardButton setBackgroundImage:[self imageForCard:card]
-                              forState:UIControlStateNormal];
-        cardButton.enabled = !card.isMatched;
+        [self drawCard:card
+                onCardView:cardView];
     }
     //General Updates
     if (gameOver){
@@ -164,6 +199,7 @@
     self.matchedTicker.attributedText = self.lastMatchedText;
 }
 
+#pragma mark segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue
                  sender:(id)sender {
     if ([segue.identifier isEqualToString:@"View Game History"]){
@@ -174,6 +210,9 @@
     }
 }
 
+
+
+#pragma mark deprecate
 //ABSTRACT
 - (NSAttributedString *)illustrateCard:(Card *)card {
     return nil;

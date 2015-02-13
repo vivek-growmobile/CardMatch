@@ -22,6 +22,7 @@
 // WAS FOR GAME TYPE CONTROL BUTTON
 //- (NSUInteger)chosenCards;
 
+@property (nonatomic, strong, readonly) NSMutableArray *cards;
 //An array holding cards that have been flipped on this turn
 @property (nonatomic, strong, readonly) NSMutableArray *matches; // of Card
 //The number of cards that can be matched together in a turn

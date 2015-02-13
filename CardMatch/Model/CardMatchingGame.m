@@ -9,13 +9,12 @@
 #import "CardMatchingGame.h"
 
 @interface CardMatchingGame()
+@property (nonatomic, strong, readwrite) NSMutableArray *cards; // of Card
+@property (nonatomic, strong) Deck* deck;
 @property (nonatomic, strong, readwrite) NSMutableArray* matches;
 @property (nonatomic, readwrite) NSUInteger gameType;
 @property (nonatomic, readwrite) NSInteger score;
 @property (nonatomic, readwrite, getter = isGameOver) BOOL gameOver;
-
-@property (nonatomic, strong) NSMutableArray *cards; // of Card
-
 
 @end
 
@@ -32,8 +31,9 @@
             self.gameType = gameType;
             self.matches = [[NSMutableArray alloc] init];
             self.cards = [[NSMutableArray alloc] init];
+            self.deck = deck;
             for (int i = 0; i < count; i++){
-                Card* newCard = [deck drawRandomCard];
+                Card* newCard = [self.deck drawRandomCard];
                 [self.cards addObject:newCard];
             }
         }
@@ -75,6 +75,12 @@
                         Card* match = self.matches[0];
                         match.matched = YES;
                         [self.matches removeObjectAtIndex:0];
+                        //REPLACING CARDS
+//                        Card* newCard = [self.deck drawRandomCard];
+//                        NSUInteger index = [self.cards indexOfObject:match];
+//                        if (newCard){
+//                            [self.cards replaceObjectAtIndex:index withObject:newCard];
+//                        }
                     }
                     NSLog(@"Num of Matches: %d (should be zero)", (int)self.matches.count);
                     self.score += (matchScore * MATCH_BONUS);

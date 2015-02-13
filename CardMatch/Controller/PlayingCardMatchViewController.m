@@ -7,13 +7,21 @@
 //
 
 #import "PlayingCardMatchViewController.h"
+#import "PlayingCard.h"
 #import "PlayingCardDeck.h"
+#import "PlayingCardView.h"
 
 @interface PlayingCardMatchViewController ()
 
 @end
 
 @implementation PlayingCardMatchViewController
+
+#pragma mark abstract implementations
+//Override
+- (CardView *) createCardViewInFrame:(CGRect)frame{
+    return [[PlayingCardView alloc] initWithFrame:frame];
+}
 
 //Override
 - (NSUInteger)getGameType {
@@ -26,6 +34,21 @@
     return [[PlayingCardDeck alloc] init];
 }
 
+//Override
+- (void)drawCard:(Card *)card
+      onCardView:(CardView *)cardView {
+    if ([card isKindOfClass:[PlayingCard class]]){
+        PlayingCard* playingCard = (PlayingCard *)card;
+        if ([cardView isKindOfClass:[PlayingCardView class]]){
+            PlayingCardView* playingCardView = (PlayingCardView *)cardView;
+            playingCardView.suit = playingCard.suit;
+            playingCardView.rank = playingCard.rank;
+            playingCardView.faceUp = playingCard.chosen;
+        }
+    }
+}
+
+#pragma mark deprecate?
 //Override
 - (NSAttributedString *)illustrateCard:(Card *)card {
     return [[NSAttributedString alloc] initWithString:card.contents];

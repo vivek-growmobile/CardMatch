@@ -104,24 +104,106 @@
     
 }
 
-- (void)drawPips {
-    NSMutableParagraphStyle* paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.alignment = NSTextAlignmentCenter;
+- (void)drawPipsWithHorizontalOffset:(CGFloat)hoffset
+                      verticalOffset:(CGFloat)voffset
+                  mirroredVertically:(BOOL)mirroredVertically {
+    [self drawPipsWithHorizontalOffset:hoffset
+                        verticalOffset:voffset
+                            upsideDown:NO];
     
+    if (mirroredVertically){
+        [self drawPipsWithHorizontalOffset:hoffset
+                            verticalOffset:voffset
+                                upsideDown:YES];
+    }
+    //TODO
+}
+
+- (void)drawPipsWithHorizontalOffset:(CGFloat)hoffset
+                      verticalOffset:(CGFloat)voffset
+                          upsideDown:(BOOL)upsideDown {
+    if (upsideDown){
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        CGContextSaveGState(context);
+        CGContextTranslateCTM(context, self.bounds.size.width, self.bounds.size.height);
+        CGContextRotateCTM(context, M_PI);
+    }
     UIFont* pipFont = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+    pipFont = [pipFont fontWithSize:(pipFont.pointSize * [self cornerScaleFactor])];
     
-     pipFont = [pipFont fontWithSize:(pipFont.pointSize * [self cornerScaleFactor])];
+    NSAttributedString* pipText = [[NSAttributedString alloc]initWithString: self.suit
+                                                                 attributes:@{NSFontAttributeName: pipFont}];
+    CGSize pipSize = pipText.size;
     
-    NSAttributedString* pipText = [[NSAttributedString alloc]initWithString: [NSString stringWithFormat:@"%@", self.suit]];
-    NSLog(@"piptext: %@", pipText);
+    CGPoint middle = CGPointMake(self.bounds.size.width / 2, self.bounds.size.height / 2);
+    CGFloat originX = middle.x - (hoffset * self.bounds.size.width) - (pipSize.width / 2.0);
+    if (hoffset) NSLog(@"x: %f", originX);
+    CGFloat originY = middle.y - (voffset * self.bounds.size.height) - (pipSize.height / 2.0);
     
-    NSLog(@"Bounds width %f", self.bounds.size.width);
-    CGRect pipRect = CGRectInset(self.bounds, self.bounds.size.width * 0.5, self.bounds.size.height * 0.5);
-    NSLog(@"piprect origin %@", NSStringFromCGPoint(pipRect.origin));
-    pipRect.size = pipText.size;
-    NSLog(@"piprect width %f", pipRect.size.width);
-    NSLog(@"piprect height %f", pipRect.size.height);
-    [pipText drawInRect:pipRect];
+    CGPoint pipOrigin = CGPointMake(originX, originY);
+    [pipText drawAtPoint:pipOrigin];
+    
+    if (hoffset) {
+        CGFloat originMirroredX = middle.x + (hoffset * self.bounds.size.width)  - (pipSize.width / 2.0);
+        if (hoffset) NSLog(@"mirrored x: %f", originMirroredX);
+        CGFloat originMirroredY = pipOrigin.y;
+        CGPoint pipOriginMirrored = CGPointMake(originMirroredX, originMirroredY);
+        [pipText drawAtPoint:pipOriginMirrored];
+    }
+    if (upsideDown){
+        CGContextRestoreGState(UIGraphicsGetCurrentContext());
+    }
+    
+}
+
+#define HOFFSET 0.165
+#define VOFFSET_1 0.270
+#define VOFFSET_2 0.175
+#define VOFFSET_3 0.090
+
+
+- (void)drawPips {
+    //Middle pip
+    if (self.rank == 1 || self.rank == 3 || self.rank == 5 || self.rank == 9){
+        [self drawPipsWithHorizontalOffset:0
+                            verticalOffset:0
+                        mirroredVertically:NO];
+    }
+    
+    //2 horizontally centered vertically mirrored pips
+    if (self.rank == 2 || self.rank == 3){
+        [self drawPipsWithHorizontalOffset:0
+                            verticalOffset:VOFFSET_1 mirroredVertically:YES];
+    }
+    
+    // 2 vertically centered horizintally mirrored pips
+    if (self.rank == 6 || self.rank == 7 || self.rank == 8){
+        [self drawPipsWithHorizontalOffset:HOFFSET
+                            verticalOffset:0
+                        mirroredVertically:NO];
+    }
+
+    //4 corner pips
+    if (self.rank == 4 || self.rank == 5 || self.rank == 6 || self.rank == 7 || self.rank == 8 || self.rank == 9 || self.rank == 10) {
+        [self drawPipsWithHorizontalOffset:HOFFSET
+                            verticalOffset:VOFFSET_1
+                            mirroredVertically:YES];
+    }
+    
+    //1 or 2 Middle vertical pips
+    if (self.rank == 7 || self.rank == 8 || self.rank == 10){
+        [self drawPipsWithHorizontalOffset:0
+                            verticalOffset:VOFFSET_2
+                        mirroredVertically:(self.rank != 7)];
+    }
+    
+    //4 Middle pips
+    if (self.rank == 9 || self.rank == 10){
+        [self drawPipsWithHorizontalOffset:HOFFSET
+                            verticalOffset:VOFFSET_3
+                        mirroredVertically:YES];
+    }
+    
 }
 
 - (void)drawRect:(CGRect)rect {

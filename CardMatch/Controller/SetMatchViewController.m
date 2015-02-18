@@ -9,12 +9,18 @@
 #import "SetMatchViewController.h"
 #import "SetCardDeck.h"
 #import "SetCard.h"
+#import "setCardView.h"
 
 @interface SetMatchViewController ()
 
 @end
 
 @implementation SetMatchViewController
+
+//Override
+- (CardView *)createCardViewInFrame:(CGRect)frame {
+    return [[SetCardView alloc] initWithFrame:frame];
+}
 
 //Override
 - (NSUInteger)getGameType {
@@ -27,6 +33,22 @@
 - (Deck *)createDeck {
     NSLog(@"Creating Set Card Deck");
     return [[SetCardDeck alloc] init];
+}
+
+//Override
+- (void)drawCard:(Card *)card
+      onCardView:(CardView *)cardView {
+    if ([card isKindOfClass:[SetCard class]]){
+        SetCard* setCard = (SetCard *)card;
+        if ([cardView isKindOfClass:[SetCardView class]]){
+            SetCardView *setCardView = (SetCardView *)cardView;
+            setCardView.number = setCard.number;
+            setCardView.symbol = setCard.symbol;
+            setCardView.shading = setCard.shading;
+            setCardView.color = setCard.color;
+            setCardView.chosen = setCard.chosen;
+        }
+    }
 }
 
 - (CGFloat)getFloatValueFor:(NSString *)shading {

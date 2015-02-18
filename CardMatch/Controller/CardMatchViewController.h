@@ -15,20 +15,18 @@
 @interface CardMatchViewController : UIViewController
 
 #pragma mark public methods
-//- (void)updateUi;
-
-//FOR SUBCLASSES
-#pragma mark abstract
 @property (weak, nonatomic) IBOutlet UIView *cardTableView;
 @property (strong, nonatomic) NSMutableArray* cardViews;
 @property (nonatomic, strong) CardMatchingGame *game;
 @property (strong, nonatomic) Deck *deck;
 
+//FOR SUBCLASSES
+#pragma mark abstract
 - (CardView *)createCardViewInFrame:(CGRect)frame;
 - (Deck *)createDeck;
 - (NSUInteger)getGameType;
 - (void)drawCard:(Card *)card
-          onCardView:(CardView *)cardView;
+      onCardView:(CardView *)cardView;
 
 #pragma mark deprecate?
 //DEPRECATE?

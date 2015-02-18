@@ -75,14 +75,6 @@
 }
 
 #pragma mark drawing
-#define CORNER_FONT_STANDARD_HEIGHT 180.0
-#define CORNER_RADIUS 12.0
-
-- (CGFloat)cornerScaleFactor { return self.bounds.size.height / CORNER_FONT_STANDARD_HEIGHT; }
-- (CGFloat)cornerRadius { return CORNER_RADIUS * [self cornerScaleFactor]; }
-- (CGFloat)cornerOffset { return [self cornerRadius] / 3.0; }
-
-
 - (void)drawCorners {
     NSMutableParagraphStyle* paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.alignment = NSTextAlignmentCenter;
@@ -135,7 +127,7 @@
                                                                  attributes:@{NSFontAttributeName: pipFont}];
     CGSize pipSize = pipText.size;
     
-    CGPoint middle = CGPointMake(self.bounds.size.width / 2, self.bounds.size.height / 2);
+    CGPoint middle = CGPointMake(self.bounds.size.width / 2.0, self.bounds.size.height / 2.0);
     CGFloat originX = middle.x - (hoffset * self.bounds.size.width) - (pipSize.width / 2.0);
     if (hoffset) NSLog(@"x: %f", originX);
     CGFloat originY = middle.y - (voffset * self.bounds.size.height) - (pipSize.height / 2.0);
@@ -206,16 +198,7 @@
     
 }
 
-- (void)drawRect:(CGRect)rect {
-    UIBezierPath* roundedRect = [UIBezierPath bezierPathWithRoundedRect:self.bounds
-                                                           cornerRadius:[self cornerRadius]];
-    [roundedRect addClip];
-    
-    [[UIColor whiteColor] setFill];
-    [[UIColor blackColor] setStroke];
-    [roundedRect fill];
-    [roundedRect stroke];
-    
+- (void)drawCardImage {
     if (self.faceUp){
         UIImage* faceImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@%@",[self rankAsString], self.suit]];
         if (faceImage){

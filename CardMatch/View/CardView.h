@@ -11,10 +11,17 @@
 
 @interface CardView : UIView
 
+#pragma mark public methods
+- (CGFloat)cornerScaleFactor;
+- (CGFloat)cornerRadius;
+- (CGFloat)cornerOffset;
+
+
 #pragma mark abstract methods
 //For Subclasses
 - (void)drawRect:(CGRect)rect;
 - (void)setup;
+- (void)drawCardImage;
 
 
 @end

@@ -43,9 +43,25 @@
             PlayingCardView* playingCardView = (PlayingCardView *)cardView;
             playingCardView.suit = playingCard.suit;
             playingCardView.rank = playingCard.rank;
-            playingCardView.faceUp = playingCard.chosen;
+            //playingCardView.faceUp = playingCard.chosen;
+            [self animateFlippingPlayingCardView:playingCardView
+                                              to:playingCard.chosen];
         }
     }
+}
+
+- (void)animateFlippingPlayingCardView:(PlayingCardView *)playingCardView
+                                    to:(BOOL)faceUp{
+    BOOL flip = playingCardView.faceUp != faceUp;
+    [UIView transitionWithView:playingCardView
+                      duration:0.5
+                       options:(flip ? UIViewAnimationOptionTransitionFlipFromRight : UIViewAnimationOptionCurveLinear)
+                    animations:^{
+                        NSLog(@"animating!");
+                        playingCardView.faceUp = faceUp;
+                    }
+                    completion:nil
+     ];
 }
 
 #pragma mark deprecate?

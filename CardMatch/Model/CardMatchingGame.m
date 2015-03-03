@@ -76,11 +76,11 @@
                         match.matched = YES;
                         [self.matches removeObjectAtIndex:0];
                         //REPLACING CARDS
-//                        Card* newCard = [self.deck drawRandomCard];
-//                        NSUInteger index = [self.cards indexOfObject:match];
-//                        if (newCard){
-//                            [self.cards replaceObjectAtIndex:index withObject:newCard];
-//                        }
+                        Card* newCard = [self.deck drawRandomCard];
+                        NSUInteger index = [self.cards indexOfObject:match];
+                        if (newCard){
+                            [self.cards replaceObjectAtIndex:index withObject:newCard];
+                        }
                     }
                     NSLog(@"Num of Matches: %d (should be zero)", (int)self.matches.count);
                     self.score += (matchScore * MATCH_BONUS);

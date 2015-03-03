@@ -40,6 +40,11 @@
 }
 
 - (void)initUi {
+    if (self.cardViews.count > 0){
+        for (CardView* cardView in self.cardViews){
+            [cardView removeFromSuperview];
+        }
+    }
     self.cardViews = [[NSMutableArray alloc] init];
     CGRect cardFrame = CGRectMake(self.cardTableView.bounds.origin.x, self.cardTableView.bounds.origin.y, self.cardTableView.bounds.size.width / GRID_WIDTH, self.cardTableView.bounds.size.height / GRID_HEIGHT);
     for (int i = 0; i < self.game.cards.count; i++){
@@ -109,7 +114,7 @@
 #pragma mark UI Target-Action
 - (IBAction)dealButton:(UIButton *)sender {
     [self newGame];
-    [self updateUi];
+    //[self updateUi];
 }
 
 - (IBAction)endGameButton:(UIButton *)sender {
@@ -175,14 +180,28 @@
     return;
 }
 
+//ABSTRACT
+- (BOOL)cardView:(CardView *)cardView
+       showsCard:(Card *)card {
+    return NO;
+}
+
 - (void)updateUi{
     BOOL gameOver = self.game.isGameOver;
     //Update each card
     for (CardView* cardView in self.cardViews){
         int index = (int)[self.cardViews indexOfObject:cardView];
         Card* card = [self.game cardAtIndex:index];
-        [self drawCard:card
+        if ([self cardView:cardView showsCard:card] || ![cardView isDrawn]){
+            [self drawCard:card
                 onCardView:cardView];
+        }
+        else {
+            [self animateReplacingCardView:cardView
+                               withNewCard:card];
+            
+        }
+        
     }
     //General Updates
     if (gameOver){
@@ -197,6 +216,20 @@
         //[self.gameType setEnabled:YES];
     }
     self.matchedTicker.attributedText = self.lastMatchedText;
+}
+
+//ABSTRACT
+- (void)animateReplacingCardView:(CardView *)cardView
+                          withNewCard:(Card *)newCard{
+//    [UIView transitionWithView:cardView
+//                      duration:1.0
+//                       options:UIViewAnimationOptionTransitionCrossDissolve
+//                    animations:^{
+//                        [self drawCard:newCard
+//                            onCardView:cardView];
+//                    }
+//                    completion:nil
+//     ];
 }
 
 #pragma mark segue

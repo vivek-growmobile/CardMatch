@@ -60,4 +60,9 @@
     return;
 }
 
+//ABSTRACT
+- (BOOL)isDrawn {
+    return NO;
+}
+
 @end

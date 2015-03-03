@@ -22,6 +22,7 @@
 - (void)drawRect:(CGRect)rect;
 - (void)setup;
 - (void)drawCardImage;
+- (BOOL)isDrawn;
 
 
 @end

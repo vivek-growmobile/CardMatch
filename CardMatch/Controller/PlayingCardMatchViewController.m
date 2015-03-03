@@ -43,25 +43,65 @@
             PlayingCardView* playingCardView = (PlayingCardView *)cardView;
             playingCardView.suit = playingCard.suit;
             playingCardView.rank = playingCard.rank;
-            //playingCardView.faceUp = playingCard.chosen;
-            [self animateFlippingPlayingCardView:playingCardView
-                                              to:playingCard.chosen];
+            if (playingCardView.faceUp != playingCard.chosen){
+                [self animateFlippingPlayingCardView:playingCardView
+                                                  to:playingCard.chosen];
+            }
+            else {
+                playingCardView.faceUp = playingCard.chosen;
+            }
         }
+    }
+}
+
+
+//Override
+- (void)animateReplacingCardView:(CardView *)cardView
+                    withNewCard:(Card *)newCard{
+    if ([cardView isKindOfClass:[PlayingCardView class]]){
+        PlayingCardView* playingCardView = (PlayingCardView *)cardView;
+        [UIView transitionWithView:playingCardView
+                          duration:0.5
+                           options:UIViewAnimationOptionTransitionFlipFromRight                    animations:^{
+                               playingCardView.faceUp = YES;
+                           }
+                        completion:^(BOOL finished){
+                            if (finished){
+                                [UIView transitionWithView:cardView
+                                                  duration:1.5
+                                                   options:UIViewAnimationOptionTransitionCrossDissolve
+                                                animations:^{
+                                                    [self drawCard:newCard
+                                                        onCardView:cardView];
+                                                }
+                                                completion:nil
+                                 ];
+                            }
+                        }
+         ];
     }
 }
 
 - (void)animateFlippingPlayingCardView:(PlayingCardView *)playingCardView
                                     to:(BOOL)faceUp{
-    BOOL flip = playingCardView.faceUp != faceUp;
     [UIView transitionWithView:playingCardView
                       duration:0.5
-                       options:(flip ? UIViewAnimationOptionTransitionFlipFromRight : UIViewAnimationOptionCurveLinear)
-                    animations:^{
-                        NSLog(@"animating!");
+                       options:UIViewAnimationOptionTransitionFlipFromRight                    animations:^{
                         playingCardView.faceUp = faceUp;
                     }
                     completion:nil
      ];
+}
+
+- (BOOL)cardView:(CardView *)cardView
+       showsCard:(Card *)card {
+    if ([cardView isKindOfClass:[PlayingCardView class]] &&
+        [card isKindOfClass:[PlayingCard class]]){
+        PlayingCard* playingCard = (PlayingCard *)card;
+        PlayingCardView* playingCardView = (PlayingCardView *)cardView;
+        return playingCard.suit == playingCardView.suit && playingCard.rank == playingCardView.rank;
+    }
+    return NO;
 }
 
 #pragma mark deprecate?

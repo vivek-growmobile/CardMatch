@@ -217,4 +217,8 @@
     }
 }
 
+- (BOOL)isDrawn {
+    return self.suit && self.rank;
+}
+
 @end

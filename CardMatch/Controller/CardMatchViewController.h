@@ -27,6 +27,10 @@
 - (NSUInteger)getGameType;
 - (void)drawCard:(Card *)card
       onCardView:(CardView *)cardView;
+- (BOOL)cardView:(CardView *)cardView
+       showsCard:(Card *)card;
+- (void)animateReplacingCardView:(CardView *)cardView
+                     withNewCard:(Card *)newCard;
 
 #pragma mark deprecate?
 //DEPRECATE?

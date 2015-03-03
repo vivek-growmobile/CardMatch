@@ -146,4 +146,8 @@
     }
 }
 
+- (BOOL)isDrawn {
+    return self.number && self.symbol && self.color && self.shading;
+}
+
 @end

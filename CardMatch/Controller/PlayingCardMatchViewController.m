@@ -62,7 +62,8 @@
         PlayingCardView* playingCardView = (PlayingCardView *)cardView;
         [UIView transitionWithView:playingCardView
                           duration:0.5
-                           options:UIViewAnimationOptionTransitionFlipFromRight                    animations:^{
+                           options:UIViewAnimationOptionTransitionFlipFromRight
+                        animations:^{
                                playingCardView.faceUp = YES;
                            }
                         completion:^(BOOL finished){

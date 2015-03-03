@@ -51,6 +51,48 @@
     }
 }
 
+//Override
+- (void)animateReplacingCardView:(CardView *)cardView
+                     withNewCard:(Card *)newCard{
+    if ([cardView isKindOfClass:[SetCardView class]]){
+        SetCardView* setCardView = (SetCardView *)cardView;
+        [UIView transitionWithView:setCardView
+                          duration:1.0
+                           options:UIViewAnimationOptionCurveLinear
+                        animations:^{
+                               setCardView.chosen = YES;
+                           }
+                        completion:^(BOOL finished){
+                            if (finished){
+                                [UIView transitionWithView:cardView
+                                                  duration:1.5
+                                                   options:UIViewAnimationOptionTransitionCrossDissolve
+                                                animations:^{
+                                                    [self drawCard:newCard
+                                                        onCardView:cardView];
+                                                }
+                                                completion:nil
+                                 ];
+                            }
+                        }
+         ];
+    }
+}
+
+- (BOOL)cardView:(CardView *)cardView
+       showsCard:(Card *)card {
+    if ([cardView isKindOfClass:[SetCardView class]] &&
+        [card isKindOfClass:[SetCard class]]){
+        SetCard* setCard = (SetCard *)card;
+        SetCardView* setCardView = (SetCardView *)cardView;
+        return setCard.number == setCardView.number &&
+            setCard.symbol == setCardView.symbol &&
+            setCard.shading == setCardView.shading &&
+            setCard.color == setCardView.color;
+    }
+    return NO;
+}
+
 - (CGFloat)getFloatValueFor:(NSString *)shading {
     if ([shading isEqualToString:@"solid"]){
         return 1;

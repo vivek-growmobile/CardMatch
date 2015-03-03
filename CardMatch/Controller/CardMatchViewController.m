@@ -199,7 +199,6 @@
         else {
             [self animateReplacingCardView:cardView
                                withNewCard:card];
-            
         }
         
     }

@@ -129,7 +129,6 @@
     
     CGPoint middle = CGPointMake(self.bounds.size.width / 2.0, self.bounds.size.height / 2.0);
     CGFloat originX = middle.x - (hoffset * self.bounds.size.width) - (pipSize.width / 2.0);
-    if (hoffset) NSLog(@"x: %f", originX);
     CGFloat originY = middle.y - (voffset * self.bounds.size.height) - (pipSize.height / 2.0);
     
     CGPoint pipOrigin = CGPointMake(originX, originY);
@@ -137,7 +136,6 @@
     
     if (hoffset) {
         CGFloat originMirroredX = middle.x + (hoffset * self.bounds.size.width)  - (pipSize.width / 2.0);
-        if (hoffset) NSLog(@"mirrored x: %f", originMirroredX);
         CGFloat originMirroredY = pipOrigin.y;
         CGPoint pipOriginMirrored = CGPointMake(originMirroredX, originMirroredY);
         [pipText drawAtPoint:pipOriginMirrored];
